@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.controller.DashboardController">
+
+    <top>
+        <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-background-color: #d3d3d3;">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Button fx:id="playerBtn" text="Player Management" styleClass="black-button"/>
+            <Button fx:id="mediaBtn" text="Media Library" styleClass="black-button"/>
+            <Button fx:id="brandingBtn" text="Branding Settings" styleClass="black-button"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="gameModeBtn" text="Game Mode" styleClass="black-button"/>
+        </HBox>
+    </top>
+
+    <center>
+        <StackPane>
+            <VBox alignment="TOP_LEFT" spacing="30" style="-fx-background-color: #f2f2f2;">
+                <padding>
+                    <Insets top="40" right="40" bottom="40" left="40"/>
+                </padding>
+
+                <VBox spacing="4">
+                    <Label fx:id="currentGameLabel" text="CURRENT GAME" styleClass="section-heading"/>
+                    <Label text="Lucky Wheel Round 1" styleClass="section-value"/>
+                </VBox>
+
+                <VBox spacing="4">
+                    <Label fx:id="playersLabel" text="PLAYERS" styleClass="section-heading"/>
+                    <Label text="09" styleClass="section-value"/>
+                </VBox>
+
+                <VBox spacing="4">
+                    <Label fx:id="statusLabel" text="STATUS" styleClass="section-heading"/>
+                    <Label text="READY" styleClass="section-value"/>
+                </VBox>
+            </VBox>
+
+            <Button fx:id="startGameBtn" text="Start Game" styleClass="start-button"
+                    StackPane.alignment="BOTTOM_RIGHT">
+                <graphic>
+                    <Label text="▶"/>
+                </graphic>
+            </Button>
+        </StackPane>
+    </center>
+
+</BorderPane>
