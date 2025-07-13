@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="openjfx-24.0.1-javadoc">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/openjfx-24.0.1-javadoc.zip!/" />
+    </SOURCES>
+  </library>
+</component>

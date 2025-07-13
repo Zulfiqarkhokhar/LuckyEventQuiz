@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+
+<BorderPane fx:id="root"
+            fx:controller="org.example.controller.AudioQuestionController"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="@questions.css"
+            prefWidth="1280" prefHeight="720">
+
+    <!-- ────────── TOP: PLAYER CARDS ────────── -->
+    <top>
+        <HBox alignment="CENTER">
+            <StackPane styleClass="player-card, red"  HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="01" styleClass="player-number"/>
+                    <VBox spacing="2" alignment="CENTER_LEFT">
+                        <Label text="15 Points" styleClass="player-points"/>
+                        <Label text="Name Player One" styleClass="player-name"/>
+                    </VBox>
+                </HBox>
+            </StackPane>
+
+            <StackPane styleClass="player-card, lilac" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="02" styleClass="player-number"/>
+                    <VBox spacing="2" alignment="CENTER_LEFT">
+                        <Label text="15 Points" styleClass="player-points"/>
+                        <Label text="Name Player Two" styleClass="player-name"/>
+                    </VBox>
+                </HBox>
+            </StackPane>
+
+            <StackPane styleClass="player-card, peach" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="03" styleClass="player-number"/>
+                    <VBox spacing="2" alignment="CENTER_LEFT">
+                        <Label text="15 Points" styleClass="player-points"/>
+                        <Label text="Name Player Three" styleClass="player-name"/>
+                    </VBox>
+                </HBox>
+            </StackPane>
+
+            <StackPane styleClass="player-card, pink"  HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="04" styleClass="player-number"/>
+                    <VBox spacing="2" alignment="CENTER_LEFT">
+                        <Label text="15 Points" styleClass="player-points"/>
+                        <Label text="Name Player Four" styleClass="player-name"/>
+                    </VBox>
+                </HBox>
+            </StackPane>
+        </HBox>
+    </top>
+
+    <!-- ────────── CENTER: QUESTION + AUDIO BAR ────────── -->
+    <center>
+        <VBox alignment="CENTER" spacing="48" styleClass="question-block-padding">
+
+            <Label fx:id="questionLabel"
+                   text="CAN YOU IDENTIFY THIS SONG?"
+                   wrapText="true"
+                   styleClass="question"/>
+
+            <!-- white rounded panel -->
+            <StackPane fx:id="audioPanel" alignment="CENTER" styleClass="audio-panel">
+
+                <VBox alignment="CENTER" spacing="20" maxWidth="600">
+
+                    <!-- ► / ❚❚ button + (time-slider-time) strip -->
+                    <HBox alignment="CENTER_LEFT" spacing="14">
+
+                        <!-- play / pause -->
+                        <Button fx:id="playPauseButton"
+                                text="▶"
+                        styleClass="play-pause"/>
+
+                        <!-- start-time  | slider |  end-time -->
+                        <HBox alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS">
+
+                            <Label fx:id="currentTime"
+                                   text="0:00"
+                                   styleClass="audio-time"/>
+
+                            <Slider fx:id="progressSlider"
+                                    min="0"
+                                    HBox.hgrow="ALWAYS"
+                                    styleClass="audio-slider"/>
+
+                            <Label fx:id="totalTime"
+                                   text="0:00"
+                                   styleClass="audio-time"/>
+                        </HBox>
+                    </HBox>
+                </VBox>
+            </StackPane>
+        </VBox>
+    </center>
+
+    <!-- ────────── BOTTOM-RIGHT: LOGO ────────── -->
+    <bottom>
+        <HBox alignment="BOTTOM_RIGHT" styleClass="logo-padding">
+            <Label text="Lucky" styleClass="logo"/>
+            <Label text="event" styleClass="logo-accent"/>
+        </HBox>
+    </bottom>
+</BorderPane>
