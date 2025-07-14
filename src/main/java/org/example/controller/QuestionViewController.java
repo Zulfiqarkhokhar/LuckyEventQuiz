@@ -6,21 +6,23 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Main Questions screen controller.
+ */
 public class QuestionViewController {
 
-    @FXML private VBox questionContainer;
+    @FXML private VBox      questionContainer;
     @FXML private ImageView addIcon;
-    @FXML private Label      maxLabel;
+    @FXML private Label     maxLabel;
 
-    /** Max number of questions allowed on screen */
     private static final int MAX_QUESTIONS = 5;
 
-    /** Dummy data to demonstrate the layout */
-    private final List<String> sampleQuestions = List.of(
+    private final List<String> sample = List.of(
             "This is the question number one which is editable when you click on it?",
             "This is the question number two which has a border when you hover over it?",
             "This is the question number three?",
@@ -30,61 +32,80 @@ public class QuestionViewController {
 
     @FXML
     public void initialize() {
-        sampleQuestions.forEach(this::addQuestionRow);
+        sample.forEach(this::addQuestionRow);
         updateAddAvailability();
     }
 
-    /* ------------------------------------------------------------------ */
-    /* Event handlers                                                     */
-    /* ------------------------------------------------------------------ */
+    /* ───────── create and insert a row ───────── */
+    private void addQuestionRow(String text) {
+        try {
+            FXMLLoader fx = new FXMLLoader(
+                    getClass().getResource("/fxml/QuestionRow.fxml"));
+            Node rowNode = fx.load();
+            QuestionRowController row = fx.getController();
 
-    @FXML
-    private void handleAddQuestion() {
-        if (questionContainer.getChildren().size() >= MAX_QUESTIONS) return;
+            row.setQuestionText(text);
 
-        addQuestionRow("New question …");
-        updateAddAvailability();
+            row.setDeleteCallback(() -> {
+                questionContainer.getChildren().remove(rowNode);
+                updateAddAvailability();
+            });
+
+            row.setEditCallback(() -> openEditModal(row));
+
+            questionContainer.getChildren().add(rowNode);
+
+        } catch (IOException ex) {
+            throw new RuntimeException("Load row failed", ex);
+        }
     }
+
+    /* ─────────────── add / reset / save ─────────────── */
+    @FXML private void handleAddQuestion() { openAddModal(); }
 
     @FXML
     private void resetQuestions() {
         questionContainer.getChildren().clear();
-        sampleQuestions.forEach(this::addQuestionRow);
+        sample.forEach(this::addQuestionRow);
         updateAddAvailability();
     }
 
     @FXML
     private void saveQuestions() {
-        // TODO: persist changes
-        System.out.println("Save clicked — implement persistence here.");
+        // TODO: persist to backend
+        System.out.println("Save clicked (stub).");
     }
 
-    /* ------------------------------------------------------------------ */
-    /* Helpers                                                            */
-    /* ------------------------------------------------------------------ */
-
-    private void addQuestionRow(String questionText) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/fxml/QuestionRow.fxml"));
-            Node row = loader.load();
-
-            QuestionRowController rowCtrl = loader.getController();
-            rowCtrl.setQuestionText(questionText);
-            rowCtrl.setDeleteCallback(() -> {
-                questionContainer.getChildren().remove(row);
-                updateAddAvailability();
-            });
-
-            questionContainer.getChildren().add(row);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load QuestionRow", e);
-        }
+    /* ──────────── modal helpers ──────────── */
+    private void openAddModal() {
+        QuestionModalController.open(
+                getWindow(),
+                null,
+                null,
+                (q, a) -> {
+                    if (!q.isBlank()) {
+                        addQuestionRow(q);
+                        updateAddAvailability();
+                    }
+                });
     }
 
+    private void openEditModal(QuestionRowController row) {
+        QuestionModalController.open(
+                getWindow(),
+                row.getQuestionText(),
+                row.getAnswers(),
+                (q, a) -> row.setQuestionText(q));
+    }
+
+    /* ───────────── util ───────────── */
     private void updateAddAvailability() {
         boolean maxed = questionContainer.getChildren().size() >= MAX_QUESTIONS;
         addIcon.setOpacity(maxed ? 0.3 : 1.0);
         maxLabel.setVisible(maxed);
+    }
+
+    private Window getWindow() {
+        return questionContainer.getScene().getWindow();
     }
 }

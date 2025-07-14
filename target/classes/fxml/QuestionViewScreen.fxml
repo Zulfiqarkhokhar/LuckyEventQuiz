@@ -42,7 +42,7 @@
         </content>
     </ScrollPane>
 
-    <HBox spacing="24" alignment="BASELINE_RIGHT"
+    <HBox spacing="24" alignment="BASELINE_CENTER"
           AnchorPane.bottomAnchor="40" AnchorPane.rightAnchor="60">
         <Button fx:id="csvBtn"   text="CSV Upload"      styleClass="secondary-btn"/>
         <Button fx:id="resetBtn" text="Reset Questions" styleClass="secondary-btn"

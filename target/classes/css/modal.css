@@ -1,0 +1,78 @@
+/* Full-screen translucent black */
+.overlay {
+    -fx-background-color: rgba(0,0,0,0.54);
+}
+
+/*** WHITE CARD **********************************************************/
+.modal-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 18;
+    -fx-padding: 0 0 90 0; /* bottom padding for button row */
+}
+
+/*** TEXT FIELD FOR QUESTION *********************************************/
+.question-field {
+    -fx-font-size: 17px;
+    -fx-font-weight: 700;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/*** “Add Answer” text ****************************************************/
+.add-label { -fx-font-weight: 600; -fx-font-size: 15px; }
+
+/*** ANSWER CHIP **********************************************************/
+.answer-chip {
+    -fx-background-color: transparent;
+    -fx-border-radius: 18;
+    -fx-border-color: #bdbdbd;
+    -fx-border-width: 2;
+    -fx-padding: 14 20;
+    -fx-min-width: 300;
+}
+
+.answer-chip:hover {
+    -fx-border-color: #e07d1e;
+    -fx-transition: all 0.18s ease-in-out;
+}
+
+/* TEXT-INPUT inside pill */
+.answer-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+}
+
+/* compact black pill button */
+.primary-btn.small {
+    -fx-pref-height: 38;      /* height exactly like mock-up */
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+
+    /* pill shape */
+    -fx-background-color: #000000;
+    -fx-background-radius: 20;   /* half of height ≈ full pill */
+
+    /* text colour */
+    -fx-text-fill: #ffffff;
+
+    /* left / right padding */
+    -fx-padding: 0 24 0 24;
+}
+
+/* existing rule — keeps hover outline & no jitter */
+.answer-chip {
+    -fx-background-color: transparent;
+    -fx-border-radius: 18;
+    -fx-border-color: #bdbdbd;
+    -fx-border-width: 2;
+    -fx-padding: 14 20;
+    -fx-min-width: 300;
+    -fx-transition: all 0.18s ease-in-out;
+}
+.answer-chip:hover { -fx-border-color: #e07d1e; }
+
+
+/*** BUTTON (re-use from question_view.css) ******************************/
+@import url("../fxml/question-view.css");

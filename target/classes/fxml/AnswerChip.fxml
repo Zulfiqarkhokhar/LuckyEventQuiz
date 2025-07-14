@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<HBox fx:id="chipRoot"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.controller.AnswerChipController"
+      alignment="CENTER_LEFT"
+      spacing="8"
+      stylesheets="@/css/modal.css"
+      styleClass="answer-chip">
+
+    <!-- EDITABLE TEXT -->
+    <TextField fx:id="textField"
+               promptText="Answer text…"
+               styleClass="answer-field"
+               HBox.hgrow="ALWAYS"/>
+
+    <!-- TRASH ICON -->
+    <ImageView fx:id="delBtn"
+               fitWidth="14" fitHeight="14"
+               pickOnBounds="true"
+               onMouseClicked="#handleDelete">
+        <image><Image url="@../icons/icon-plus.png"/></image>
+    </ImageView>
+</HBox>

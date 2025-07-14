@@ -2,40 +2,27 @@ package org.example.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
 
-import java.util.function.Consumer;
-
+/**
+ * One question row in the scroll list.
+ */
 public class QuestionRowController {
 
     @FXML private Label questionLbl;
 
-    /** Callback set by parent controller for delete action */
     private Runnable onDelete = () -> {};
-    public void setDeleteCallback(Runnable r) { this.onDelete = r; }
+    private Runnable onEdit   = () -> {};
 
-    /* ------------------------------------------------------------------ */
-    /* Public API                                                         */
-    /* ------------------------------------------------------------------ */
+    public void setDeleteCallback(Runnable r) { onDelete = r; }
+    public void setEditCallback  (Runnable r) { onEdit   = r; }
 
-    public void setQuestionText(String text) {
-        questionLbl.setText(text);
-    }
+    public void setQuestionText(String text) { questionLbl.setText(text); }
+    public String getQuestionText()          { return questionLbl.getText(); }
 
-    /* ------------------------------------------------------------------ */
-    /* Event handlers                                                     */
-    /* ------------------------------------------------------------------ */
+    /* Answers not stored per row in this demo */
+    public java.util.List<String> getAnswers() { return java.util.List.of(); }
+    public void setAnswers(java.util.List<String> ignored) { /* no-op */ }
 
-    @FXML
-    private void handleDelete() {
-        onDelete.run();
-    }
-
-    @FXML
-    private void handleEdit() {
-        TextInputDialog dlg = new TextInputDialog(questionLbl.getText());
-        dlg.setHeaderText("Edit Question");
-        dlg.setContentText("Question:");
-        dlg.showAndWait().ifPresent(questionLbl::setText);
-    }
+    @FXML private void handleDelete() { onDelete.run(); }
+    @FXML private void handleEdit()   { onEdit.run();   }
 }
