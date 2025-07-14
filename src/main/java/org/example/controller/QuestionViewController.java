@@ -1,36 +1,26 @@
 package org.example.controller;
 
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.TextInputDialog;
 
 import java.io.IOException;
+import java.util.List;
 
-/**
- * Controller for the whole Questions page.
- */
 public class QuestionViewController {
 
-    /* -- FXML-injected nodes -- */
-    @FXML private VBox       questionList;
-    @FXML private ScrollPane scrollPane;
-    @FXML private Label      addQuestionText;
-    @FXML private ImageView  addQuestionIcon;
-    @FXML private Button     csvUploadBtn;
-    @FXML private Button     resetBtn;
-    @FXML private Button     saveBtn;
+    @FXML private VBox questionContainer;
+    @FXML private ImageView addIcon;
+    @FXML private Label      maxLabel;
 
-    /* -- Backing model -- */
-    private final ObservableList<String> questions = FXCollections.observableArrayList(
+    /** Max number of questions allowed on screen */
+    private static final int MAX_QUESTIONS = 5;
+
+    /** Dummy data to demonstrate the layout */
+    private final List<String> sampleQuestions = List.of(
             "This is the question number one which is editable when you click on it?",
             "This is the question number two which has a border when you hover over it?",
             "This is the question number three?",
@@ -38,57 +28,63 @@ public class QuestionViewController {
             "This is the question number five?"
     );
 
-    /* ---------- FXML life-cycle ---------- */
     @FXML
-    private void initialize() {
-        refreshList();
-
-        resetBtn.setOnAction(e -> {
-            questions.clear();
-            refreshList();
-        });
-
-        saveBtn.setOnAction(e -> {
-            // TODO – persist however you like
-            System.out.println("Saving questions: " + questions);
-        });
+    public void initialize() {
+        sampleQuestions.forEach(this::addQuestionRow);
+        updateAddAvailability();
     }
 
-    /* ---------- Helpers ---------- */
-    private void refreshList() {
-        questionList.getChildren().clear();
+    /* ------------------------------------------------------------------ */
+    /* Event handlers                                                     */
+    /* ------------------------------------------------------------------ */
 
-        for (int i = 0; i < questions.size(); i++) {
-            final int idx = i;
+    @FXML
+    private void handleAddQuestion() {
+        if (questionContainer.getChildren().size() >= MAX_QUESTIONS) return;
 
-            try {
-                FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("/fxml/QuestionRow.fxml"));
-                HBox row = loader.load();
+        addQuestionRow("New question …");
+        updateAddAvailability();
+    }
 
-                QuestionRowController rowCtrl = loader.getController();
-                rowCtrl.setQuestionText(questions.get(idx));
+    @FXML
+    private void resetQuestions() {
+        questionContainer.getChildren().clear();
+        sampleQuestions.forEach(this::addQuestionRow);
+        updateAddAvailability();
+    }
 
-                rowCtrl.setOnDelete(rc -> {
-                    questions.remove(idx);
-                    refreshList();
-                });
+    @FXML
+    private void saveQuestions() {
+        // TODO: persist changes
+        System.out.println("Save clicked — implement persistence here.");
+    }
 
-                rowCtrl.setOnEdit(rc -> {
-                    TextInputDialog dlg = new TextInputDialog(questions.get(idx));
-                    dlg.setHeaderText("Edit question");
-                    dlg.setContentText("Question:");
-                    dlg.showAndWait().ifPresent(newText -> {
-                        questions.set(idx, newText.trim());
-                        refreshList();
-                    });
-                });
+    /* ------------------------------------------------------------------ */
+    /* Helpers                                                            */
+    /* ------------------------------------------------------------------ */
 
-                questionList.getChildren().add(row);
+    private void addQuestionRow(String questionText) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/fxml/QuestionRow.fxml"));
+            Node row = loader.load();
 
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            QuestionRowController rowCtrl = loader.getController();
+            rowCtrl.setQuestionText(questionText);
+            rowCtrl.setDeleteCallback(() -> {
+                questionContainer.getChildren().remove(row);
+                updateAddAvailability();
+            });
+
+            questionContainer.getChildren().add(row);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load QuestionRow", e);
         }
+    }
+
+    private void updateAddAvailability() {
+        boolean maxed = questionContainer.getChildren().size() >= MAX_QUESTIONS;
+        addIcon.setOpacity(maxed ? 0.3 : 1.0);
+        maxLabel.setVisible(maxed);
     }
 }

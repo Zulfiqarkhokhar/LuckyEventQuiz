@@ -1,48 +1,41 @@
 package org.example.controller;
 
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
+
 import java.util.function.Consumer;
 
-/**
- * Controller for a single question “card” row.
- */
 public class QuestionRowController {
 
-    /* -- FXML-injected nodes -- */
-    @FXML private Label  questionLabel;
-    @FXML private Button deleteBtn;
-    @FXML private Button editBtn;
+    @FXML private Label questionLbl;
 
-    /* -- Callbacks wired from the parent list -- */
-    private Consumer<QuestionRowController> onDelete;
-    private Consumer<QuestionRowController> onEdit;
+    /** Callback set by parent controller for delete action */
+    private Runnable onDelete = () -> {};
+    public void setDeleteCallback(Runnable r) { this.onDelete = r; }
 
-    /* ---------- FXML life-cycle ---------- */
-    @FXML
-    private void initialize() {
-        //  onAction handlers are already declared in FXML, so nothing is
-        //  strictly required here – but you COULD add row-level setup if needed.
+    /* ------------------------------------------------------------------ */
+    /* Public API                                                         */
+    /* ------------------------------------------------------------------ */
+
+    public void setQuestionText(String text) {
+        questionLbl.setText(text);
     }
 
-    /* ---------- Handlers wired in FXML ---------- */
+    /* ------------------------------------------------------------------ */
+    /* Event handlers                                                     */
+    /* ------------------------------------------------------------------ */
+
     @FXML
-    private void onDelete(ActionEvent e) {
-        if (onDelete != null) onDelete.accept(this);
+    private void handleDelete() {
+        onDelete.run();
     }
 
     @FXML
-    private void onEdit(ActionEvent e) {
-        if (onEdit != null) onEdit.accept(this);
+    private void handleEdit() {
+        TextInputDialog dlg = new TextInputDialog(questionLbl.getText());
+        dlg.setHeaderText("Edit Question");
+        dlg.setContentText("Question:");
+        dlg.showAndWait().ifPresent(questionLbl::setText);
     }
-
-    /* ---------- Public API for the parent controller ---------- */
-    public void setQuestionText(String text) { questionLabel.setText(text); }
-
-    public void setOnDelete(Consumer<QuestionRowController> cb) { this.onDelete = cb; }
-
-    public void setOnEdit(Consumer<QuestionRowController> cb)   { this.onEdit   = cb; }
 }

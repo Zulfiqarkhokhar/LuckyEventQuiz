@@ -1,55 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
 
-<BorderPane fx:id="root"
+<AnchorPane fx:id="root"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.example.controller.QuestionViewController"
+            prefWidth="1392" prefHeight="768"
             stylesheets="@question-view.css">
 
-    <!-- Page padding -->
-    <padding><Insets top="40" right="64" bottom="40" left="64"/></padding>
+    <Label text="QUESTIONS"
+           styleClass="title" AnchorPane.leftAnchor="60" AnchorPane.topAnchor="35"/>
 
-    <!-- ─────────────────────────  TOP BAR  ─────────────────────────── -->
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="16">
-            <Label text="QUESTIONS" styleClass="page-title"/>
-            <Pane HBox.hgrow="ALWAYS"/>
-            <HBox alignment="CENTER_RIGHT" spacing="6">
-                <Label fx:id="addQuestionText" text="Add Question" styleClass="add-question-label"/>
-                <ImageView fitHeight="18" preserveRatio="true">
-                    <image>
-                        <Image url="@/icons/icon-plus.png"/>
-                    </image>
-                </ImageView>
-            </HBox>
-        </HBox>
-    </top>
+    <HBox spacing="6" AnchorPane.rightAnchor="60" AnchorPane.topAnchor="25"
+          alignment="CENTER_RIGHT">
+        <VBox alignment="CENTER_RIGHT" spacing="2">
+            <Label text="Add Question" styleClass="add-label"/>
+            <Label fx:id="maxLabel"
+                   text="Max. Questions reached"
+                   styleClass="max-label" visible="false"/>
+        </VBox>
 
-    <!-- ────────────────────────  MAIN LIST  ────────────────────────── -->
-    <center>
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
-            <content>
-                <VBox fx:id="questionList" spacing="16"/>
-            </content>
-        </ScrollPane>
-    </center>
+        <!-- crossed-out plus as disabled icon -->
+        <ImageView fx:id="addIcon"
+                   fitWidth="32" fitHeight="32"
+                   pickOnBounds="true"
+                   onMouseClicked="#handleAddQuestion">
+            <image>
+                <Image url="@../icons/plus_disabled.png"/>
+            </image>
+        </ImageView>
+    </HBox>
 
-    <!-- ────────────────────────  FOOTER BAR  ───────────────────────── -->
-    <bottom>
-        <HBox alignment="CENTER_RIGHT" spacing="24">
-            <Button fx:id="csvUploadBtn" text="CSV Upload" styleClass="secondary-btn">
-                <graphic>
-                    <ImageView fitHeight="18" preserveRatio="true">
-                        <image>
-                            <Image url="@/icons/icon-plus.png"/>
-                        </image>
-                    </ImageView>
-                </graphic>
-            </Button>
-            <Button fx:id="resetBtn" text="Reset Questions" styleClass="secondary-btn"/>
-            <Button fx:id="saveBtn" text="Save Questions" styleClass="primary-btn"/>
-        </HBox>
-    </bottom>
-</BorderPane>
+    <ScrollPane fx:id="questionScroll"
+                AnchorPane.leftAnchor="60" AnchorPane.rightAnchor="60"
+                AnchorPane.topAnchor="95" AnchorPane.bottomAnchor="130"
+                hbarPolicy="NEVER" fitToWidth="true">
+        <content>
+            <VBox fx:id="questionContainer" spacing="18" fillWidth="true"/>
+        </content>
+    </ScrollPane>
+
+    <HBox spacing="24" alignment="BASELINE_RIGHT"
+          AnchorPane.bottomAnchor="40" AnchorPane.rightAnchor="60">
+        <Button fx:id="csvBtn"   text="CSV Upload"      styleClass="secondary-btn"/>
+        <Button fx:id="resetBtn" text="Reset Questions" styleClass="secondary-btn"
+                onAction="#resetQuestions"/>
+        <Button fx:id="saveBtn"  text="Save Questions"  styleClass="primary-btn"
+                onAction="#saveQuestions"/>
+    </HBox>
+</AnchorPane>

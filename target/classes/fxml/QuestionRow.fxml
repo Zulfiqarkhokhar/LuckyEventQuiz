@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<HBox fx:id="rowRoot"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.controller.QuestionRowController"
+      alignment="CENTER_LEFT"
+      spacing="12"
+      styleClass="question-row">
 
-</AnchorPane>
+    <!-- QUESTION TEXT -->
+    <Label fx:id="questionLbl" wrapText="true"/>
+
+    <!-- Spacer grows and pushes everything that follows to the right side -->
+    <Region HBox.hgrow="ALWAYS"/>
+
+    <!-- DELETE ICON -->
+    <ImageView fx:id="deleteIcon"
+               fitWidth="20" fitHeight="20"
+               pickOnBounds="true"
+               onMouseClicked="#handleDelete">
+        <image><Image url="@../icons/icon-plus.png"/></image>
+    </ImageView>
+
+    <!-- EDIT ICON -->
+    <ImageView fx:id="editIcon"
+               fitWidth="20" fitHeight="20"
+               pickOnBounds="true"
+               onMouseClicked="#handleEdit">
+        <image><Image url="@../icons/icon-plus.png"/></image>
+    </ImageView>
+
+</HBox>
