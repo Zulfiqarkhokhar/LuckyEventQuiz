@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<VBox fx:id="cardRoot"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.controller.ImageCardController"
+      styleClass="image-card"
+      spacing="8"
+      prefWidth="340" maxWidth="Infinity">
+
+    <!-- HEADER ROW: title + actions -->
+    <HBox alignment="CENTER_LEFT" spacing="8">
+        <Label fx:id="titleLbl" text="Image 01" styleClass="card-title" />
+        <Region HBox.hgrow="ALWAYS"/>
+        <!-- delete -->
+        <ImageView fx:id="deleteIcon"
+                   fitWidth="16" fitHeight="16" pickOnBounds="true"
+                   onMouseClicked="#handleDelete">
+            <image><Image url="@../icons/icon-plus.png"/></image>
+        </ImageView>
+        <!-- upload/replace -->
+        <ImageView fx:id="uploadIcon"
+                   fitWidth="18" fitHeight="18" pickOnBounds="true"
+                   onMouseClicked="#handleUpload">
+            <image><Image url="@../icons/icon-plus.png"/></image>
+        </ImageView>
+    </HBox>
+
+    <StackPane fx:id="previewWrapper" styleClass="preview-wrapper"
+               prefHeight="180" minHeight="120" maxHeight="Infinity">
+        <ImageView fx:id="previewImage"
+                   preserveRatio="true"
+                   fitWidth="300" fitHeight="160">
+            <image><Image url="@../icons/icon-plus.png"/></image>
+        </ImageView>
+
+        <!-- expand icon (bottom-right overlay) -->
+        <ImageView fx:id="expandIcon"
+                   styleClass="expand-icon"
+                   fitWidth="16" fitHeight="16" pickOnBounds="true"
+                   onMouseClicked="#handleExpand">
+            <image><Image url="@../icons/icon-plus.png"/></image>
+        </ImageView>
+    </StackPane>
+</VBox>
