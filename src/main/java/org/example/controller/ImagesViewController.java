@@ -135,14 +135,10 @@ public class ImagesViewController {
     @FXML
     private void handleAddImage() {
         if (cardNodes.size() >= MAX_IMAGES) return;
-
-        UploadImageModalController.open(
-                imageFlow.getScene().getWindow(),
-                file -> {
-                    addImageCard("New Image", file);
-                    updateAddAvailability();
-                });
+        addImageCard("New Image");       // blank card, no modal
+        updateAddAvailability();
     }
+
 
     /* ═════════════ Upload icon inside a card ═════════════ */
     /* Upload icon inside a card ----------------------------------------- */

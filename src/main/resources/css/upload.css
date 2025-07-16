@@ -3,11 +3,15 @@
 
 /* white card */
 .upload-card {
-    -fx-background-color: red;
+    -fx-background-color: #ffffff;
     -fx-background-radius: 12;
     -fx-padding: 32 24;
+    -fx-font-size: 30;
 }
 
 /* text styling */
-.upload-link  { -fx-fill: #ff9b34; -fx-underline: true; }
-Text { -fx-font-size: 14px; -fx-fill: #000000; }
+.upload-link  {
+    -fx-fill: #ff9b34;
+    -fx-font-weight: 700;
+}
+Text { -fx-font-size: 16px; -fx-font-weight: 700; -fx-fill: #000000; }

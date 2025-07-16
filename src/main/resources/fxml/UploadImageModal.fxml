@@ -13,8 +13,8 @@
            styleClass="upload-overlay">
 
     <!-- white card -->
-    <VBox alignment="CENTER" spacing="18"
-          styleClass="upload-card" prefWidth="340" prefHeight="200">
+    <VBox fx:id="card" alignment="CENTER" spacing="18" onMouseClicked="#handleChooseFile"
+          styleClass="upload-card" prefWidth="500" prefHeight="250">
 
         <!-- icon -->
         <ImageView fitWidth="28" fitHeight="28">
@@ -23,8 +23,8 @@
 
         <!-- nicely styled text -->
         <TextFlow textAlignment="CENTER" lineSpacing="2">
-            <Text text="Click to upload" styleClass="upload-link"/>
-            <Text text=" or drag and drop\n.JPG, .PNG, or .GIF (max. Xmb)"/>
+            <Text  text="Click to upload" styleClass="upload-link"/>
+            <Text text=" or drag and drop &#10;.JPG, .PNG, or .GIF (max. Xmb)"/>
         </TextFlow>
     </VBox>
 </StackPane>
