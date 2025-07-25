@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<!-- ───────────── overlay (dim background) ───────────── -->
+<StackPane fx:id="overlay"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.example.controller.QuestionModalController"
+           alignment="CENTER"
+           stylesheets="@/css/modal.css"
+           styleClass="overlay">
+
+    <!-- ───────────── white rounded card ───────────── -->
+    <AnchorPane fx:id="card" styleClass="modal-card"
+                maxWidth="840"  minWidth="640"
+                maxHeight="600">
+
+        <!-- ①  QUESTION FIELD + ✕ icon -->
+        <HBox spacing="8" alignment="CENTER_LEFT"
+              AnchorPane.leftAnchor="25" AnchorPane.rightAnchor="25"
+              AnchorPane.topAnchor="25">
+            <TextField fx:id="questionField"
+                       styleClass="question-field"
+                       HBox.hgrow="ALWAYS"/>
+
+            <!-- close icon -->
+            <ImageView fx:id="closeBtn"
+                       fitWidth="18" fitHeight="18" pickOnBounds="true"
+                       onMouseClicked="#handleClose">
+                <image><Image url="@../icons/icon-plus.png"/></image>
+            </ImageView>
+        </HBox>
+
+        <Separator AnchorPane.leftAnchor="25" AnchorPane.rightAnchor="25"
+                   AnchorPane.topAnchor="80"/>
+
+        <!-- ②  “Add Answer +” row (clickable) -->
+        <HBox spacing="6" alignment="CENTER_LEFT"
+              AnchorPane.leftAnchor="40" AnchorPane.topAnchor="110"
+              onMouseClicked="#handleAddAnswer">
+            <Label text="Add Answer" styleClass="add-label"/>
+            <ImageView fitWidth="16" fitHeight="16" pickOnBounds="true">
+                <image><Image url="@../icons/icon-plus.png"/></image>
+            </ImageView>
+        </HBox>
+
+        <!-- ③  ANSWER CHIPS (two per row) -->
+        <FlowPane fx:id="answersPane"
+                  hgap="28" vgap="22"
+                  AnchorPane.leftAnchor="25" AnchorPane.rightAnchor="25"
+                  AnchorPane.topAnchor="150"/>
+
+        <!-- ④  SAVE button (small black pill) -->
+        <Button fx:id="saveBtn"
+                text="Save Changes"
+                styleClass="primary-btn, small"
+                AnchorPane.bottomAnchor="35" AnchorPane.rightAnchor="25"
+                onAction="#handleSave"/>
+
+    </AnchorPane>
+</StackPane>

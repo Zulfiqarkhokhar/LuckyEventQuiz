@@ -1,0 +1,127 @@
+/* ---------- GLOBAL ---------- */
+
+/* Monitors window size & scales type on the fly (see controller) */
+.large-text {}
+
+/* ---------- PLAYER CARDS ---------- */
+/* generic (radius, padding, etc.)  – KEEP this first */
+.player-card {
+    -fx-min-height: 100;
+    -fx-background-radius: 0 0 18 18;
+    -fx-padding: 18 28 24 28;
+}
+
+
+
+.player-card.active {
+    -fx-border-color: #000000;
+    -fx-border-width: 4;
+    -fx-border-radius: 18;
+}
+
+/* Theme colours */
+.red   { -fx-background-color: #FFD3D3; }
+.lilac { -fx-background-color: #E0E0FF; }
+.peach { -fx-background-color: #FFDEC3; }
+.pink  { -fx-background-color: #FDC8DE; }
+
+/* Typography inside cards */
+.player-number { -fx-font-size: 40; -fx-font-weight: 900;  }
+.player-points { -fx-font-size: 16; -fx-font-weight: 700;  }
+.player-name   { -fx-font-size: 13; -fx-font-weight: 700;  }
+
+
+
+/* ---------- QUESTION SECTION ---------- */
+.subtitle { -fx-font-size: 18; -fx-text-fill: #F57C00; -fx-font-weight: 800; }
+
+.question {
+    -fx-font-size: 36;
+    -fx-font-weight: 800;
+    -fx-line-spacing: 2;
+}
+
+/* ---------- ANSWERS ---------- */
+.answer {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 18;
+    -fx-padding: 40 60;
+    -fx-font-size: 18;
+    -fx-text-fill: #000;
+    -fx-font-weight: 700;
+    -fx-border-color: transparent;
+}
+.answer:hover { -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 2); }
+
+/* ---------- LOGO ---------- */
+.logo        { -fx-font-size: 26; -fx-font-weight: 700; }
+.logo-accent { -fx-font-size: 26; -fx-font-weight: 700; -fx-text-fill: #F57C00; }
+
+/* 60 top | 64 right | 48 bottom | 64 left */
+.question-block-padding {
+    -fx-padding: 0 0 48 64;
+}
+
+/* 0 top | 48 right | 24 bottom | 0 left */
+.logo-padding {
+    -fx-padding: 0 48 24 0;
+}
+
+
+/*question image*/
+/* Soft shadow under the displayed image */
+.question-image {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0, 0, 3);
+    -fx-min-height: 100;
+    -fx-max-height: 10%;
+    -fx-max-height: 100;
+}
+
+.image-question-block-padding{
+    -fx-padding: 30 0 48 64;
+}
+
+
+/*audio questions*/
+/* ---------- AUDIO PANEL ---------- */
+.audio-panel {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 18;
+    -fx-padding: 40 60;     /* top/right/bottom/left */
+    -fx-max-width: 50;
+}
+
+/* timestamps */
+.audio-time {
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
+}
+
+/* slider colours */
+.audio-slider .track {
+    -fx-background-color: #4d4d4d;      /* dark grey line */
+    -fx-background-radius: 2;
+    -fx-pref-height: 2;
+}
+.audio-slider .thumb {
+    -fx-background-color: #F57C00;      /* orange knob */
+    -fx-background-radius: 7;
+    -fx-pref-width: 14;
+    -fx-pref-height: 14;
+}
+
+.play-pause {
+    -fx-background-color: transparent;
+    -fx-font-size: 30;
+    -fx-text-fill: #F57C00;   /* orange */
+    -fx-cursor: hand;
+}
+.play-pause:hover {
+    -fx-text-fill: #d86800;   /* darker on hover */
+}
+
+.loading-overlay {
+    -fx-background-color: rgba(255,255,255,0.80);   /* white veil */
+    -fx-background-radius: 18;
+}
+

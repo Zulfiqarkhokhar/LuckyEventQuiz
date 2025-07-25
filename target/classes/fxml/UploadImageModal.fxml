@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<StackPane fx:id="overlay"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.example.controller.UploadImageModalController"
+           alignment="CENTER"
+           stylesheets="@/css/upload.css"
+           styleClass="upload-overlay">
+
+    <!-- white card -->
+    <VBox fx:id="card" alignment="CENTER" spacing="18" onMouseClicked="#handleChooseFile"
+          styleClass="upload-card" prefWidth="500" prefHeight="250">
+
+        <!-- icon -->
+        <ImageView fitWidth="28" fitHeight="28">
+            <image><Image url="@../icons/icon-plus.png"/></image>
+        </ImageView>
+
+        <!-- nicely styled text -->
+        <TextFlow textAlignment="CENTER" lineSpacing="2">
+            <Text  text="Click to upload" styleClass="upload-link"/>
+            <Text text=" or drag and drop &#10;.JPG, .PNG, or .GIF (max. Xmb)"/>
+        </TextFlow>
+    </VBox>
+</StackPane>

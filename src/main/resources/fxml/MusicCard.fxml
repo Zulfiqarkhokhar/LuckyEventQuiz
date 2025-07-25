@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<VBox fx:id="cardRoot"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.controller.MusicCardController"
+      styleClass="music-card"
+      spacing="12" prefWidth="560">
+
+    <HBox alignment="CENTER_LEFT">
+        <VBox>
+            <Label fx:id="titleLbl" text="Music 01" styleClass="music-title"/>
+            <Label fx:id="fileLbl"  text="sample.mp3" styleClass="music-file"/>
+        </VBox>
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <!-- delete -->
+        <ImageView fitWidth="16" fitHeight="16" onMouseClicked="#delete"
+                   pickOnBounds="true">
+            <image><Image url="@../icons/delete-icon.png"/></image>
+        </ImageView>
+
+        <!-- upload / replace -->
+        <ImageView fitWidth="18" fitHeight="18" onMouseClicked="#upload"
+                   pickOnBounds="true">
+            <image><Image url="@../icons/icon-plus.png"/></image>
+        </ImageView>
+
+        <!-- play / pause -->
+        <ImageView fx:id="playIcon" fitWidth="18" fitHeight="18"
+                   onMouseClicked="#togglePlay"
+                   pickOnBounds="true">
+            <image><Image url="@../icons/delete-icon.png"/></image>
+        </ImageView>
+    </HBox>
+
+    <VBox fx:id="playerPane" spacing="4" visible="false" managed="false">
+        <Slider fx:id="slider" maxWidth="Infinity"/>
+        <HBox alignment="CENTER_LEFT" spacing="6">
+            <Label fx:id="currentLbl" text="0:00" styleClass="time-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="totalLbl"   text="0:00" styleClass="time-label"/>
+        </HBox>
+    </VBox>
+</VBox>

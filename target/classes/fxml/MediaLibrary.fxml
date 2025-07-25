@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane fx:id="root"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.controller.MediaLibraryController"
+            prefWidth="1392" prefHeight="768"
+            stylesheets="@/css/media.css">
+
+    <VBox spacing="10"
+          AnchorPane.leftAnchor="60" AnchorPane.topAnchor="80">
+        <Label text="LUCKY EVENT"    styleClass="header-small"/>
+        <Label text="MEDIA LIBRARY"  styleClass="header-big"/>
+    </VBox>
+
+    <HBox fx:id="cardBox" spacing="90" alignment="CENTER"
+          AnchorPane.leftAnchor="60" AnchorPane.rightAnchor="60"
+          AnchorPane.topAnchor="260">
+        <VBox fx:id="cardQuestions" styleClass="media-card">
+            <StackPane styleClass="card-top" prefHeight="180">
+                <ImageView fitWidth="96" preserveRatio="true">
+                    <image><Image url="@../icons/icon-plus.png"/></image>
+                </ImageView>
+            </StackPane>
+            <Label text="Questions" styleClass="card-label"/>
+        </VBox>
+
+        <VBox fx:id="cardImages" styleClass="media-card">
+            <StackPane styleClass="card-top" prefHeight="180">
+                <ImageView fitWidth="96" preserveRatio="true">
+                    <image><Image url="@../icons/icon-plus.png"/></image>
+                </ImageView>
+            </StackPane>
+            <Label text="Images" styleClass="card-label"/>
+        </VBox>
+
+        <VBox fx:id="cardMusic" styleClass="media-card">
+            <StackPane styleClass="card-top" prefHeight="180">
+                <ImageView fitWidth="96" preserveRatio="true">
+                    <image><Image url="@../icons/icon-plus.png"/></image>
+                </ImageView>
+            </StackPane>
+            <Label text="Music" styleClass="card-label"/>
+        </VBox>
+    </HBox>
+</AnchorPane>

@@ -19,7 +19,7 @@ public class Main extends Application {
         primaryStage.show();
 
         PauseTransition delay = new PauseTransition(Duration.seconds(3.5));
-        delay.setOnFinished(event -> Dashboard.show(primaryStage));
+        delay.setOnFinished(event -> AudioViewScreen.show(primaryStage));
         delay.play();
     }
 

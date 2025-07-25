@@ -1,0 +1,73 @@
+/* root background */
+#root {
+    -fx-background-color: #f3f3f3;
+}
+
+/* title */
+.title {
+    -fx-font-size: 26px;
+    -fx-font-family: "SF Pro Display", "Segoe UI", sans-serif;
+    -fx-font-weight: 700;
+}
+
+/* add-question texts */
+.add-label      { -fx-font-size: 14px; -fx-font-weight: 600; }
+.max-label      { -fx-font-size: 11px; -fx-text-fill: #c20000; }
+
+/* ----- QUESTION ROW --------------------------------------------------- */
+.question-row {
+    -fx-background-color: #ffffff;
+    -fx-padding: 24 30;
+    -fx-background-radius: 22;
+
+    /* === NEW / CHANGED =============================================== */
+    /* Always reserve 3 px for the outline, but start fully transparent. */
+    -fx-border-width: 3;
+    -fx-border-color: transparent;
+    -fx-border-radius: 22;
+
+    /* Smooth colour fade; no size change = no “shake”. */
+    -fx-transition: all 0.18s ease-in-out;   /* JavaFX 17-plus supports this */
+}
+
+.question-row:hover {
+    -fx-border-color: #e07d1e;               /* orange outline on hover */
+}
+
+
+/* ----- BUTTONS -------------------------------------------------------- */
+.primary-btn {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+    -fx-background-radius: 12;
+    -fx-pref-height: 60;
+    -fx-padding: 0 32 0 32;
+}
+
+.secondary-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-text-fill: #000000;
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-pref-height: 60;
+    -fx-padding: 0 32 0 32;
+}
+
+/* scrollbar track / thumb colouring */
+.scroll-pane .viewport        { -fx-background-color: transparent; }
+.scroll-bar:vertical .thumb   { -fx-background-color: #e07d1e; }
+.scroll-bar:vertical .track   { -fx-background-color: #cfcfcf; }
+
+/* completely strip borders / padding around the ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
