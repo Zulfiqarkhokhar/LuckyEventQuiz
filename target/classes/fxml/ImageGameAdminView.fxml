@@ -7,8 +7,8 @@
 <?import javafx.geometry.Pos?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.controller.QuestionGameAdminController"
-            stylesheets="@/css/question-game.css">
+            fx:controller="org.example.controller.ImageGameAdminController"
+            stylesheets="@/css/image-game.css">
 
     <!-- TOP PLAYER HEADER -->
     <top>
@@ -84,34 +84,45 @@
     <!-- CENTER QUESTION AND ANSWERS -->
     <center>
         <VBox alignment="CENTER" spacing="48" styleClass="question-block-padding">
-            <!-- Question block -->
-            <VBox spacing="8">
-                <Label text="CURRENT QUESTION" styleClass="subtitle"/>
-                <Label fx:id="questionLabel"
-                       text="THIS IS THE QUESTION THAT IS BEING ASK TO THE PLAYERS WHICH SHOULD BUZZ AS SOON AS THEY KNOW THE ANSWER."
-                       wrapText="true" styleClass="question"/>
-            </VBox>
+            <padding>
+                <Insets top="20" bottom="20" right="30"/>
+            </padding>
+            <children>
+            <!-- Manage Images Button in Top Right -->
+           <HBox spacing="40" alignment="CENTER_RIGHT">
+               <padding>
+                   <Insets top="20" bottom="20" right="30"/>
+               </padding>
+               <Button text="🖼 Manage Images"
+                       layoutX="1120" layoutY="20"
+                       styleClass="manage-btn" />
+           </HBox>
 
-            <!-- Answers -->
-            <HBox spacing="20">
-                <VBox alignment="CENTER" spacing="10" styleClass="answer">
-                    <Label text="Answer A" styleClass="answer-title"/>
-                    <Label text="Answer A text goes here." wrapText="true" styleClass="answer-text"/>
+            <!-- Centered Horizontal Layout -->
+            <HBox spacing="40" alignment="CENTER_LEFT">
+
+                <!-- Left: Current Image Section -->
+                <VBox spacing="10">
+                    <Label text="CURRENT IMAGE" styleClass="subtitle"/>
+                    <Pane prefWidth="450" prefHeight="300" style="-fx-background-color: white; -fx-border-color: gray;" />
                 </VBox>
-                <VBox alignment="CENTER" spacing="10" styleClass="answer">
-                    <Label text="Answer B" styleClass="answer-title"/>
-                    <Label text="Answer B text goes here." wrapText="true" styleClass="answer-text"/>
-                </VBox>
-                <VBox alignment="CENTER" spacing="10" styleClass="answer">
-                    <Label text="Answer C" styleClass="answer-title"/>
-                    <Label text="Answer C text goes here." wrapText="true" styleClass="answer-text"/>
-                </VBox>
-                <VBox alignment="CENTER" spacing="10" styleClass="answer">
-                    <Label text="Answer D" styleClass="answer-title"/>
-                    <Label text="Answer D text goes here." wrapText="true" styleClass="answer-text"/>
+
+                <!-- Middle: Answer Card -->
+                <VBox spacing="16" styleClass="answer-card" prefWidth="300" prefHeight="300">
+                    <VBox spacing="5">
+                        <Label text="Answer A" styleClass="answer-title"/>
+                        <Label text="This is the answer 01 to the question which is asked above."
+                               wrapText="true" styleClass="answer-text"/>
+                    </VBox>
+                    <VBox spacing="5">
+                        <Label text="Progress" styleClass="answer-title"/>
+                        <ProgressBar progress="0.3" prefWidth="200" style="-fx-accent: green;" />
+                    </VBox>
                 </VBox>
             </HBox>
+            </children>
         </VBox>
+
     </center>
 
     <bottom>

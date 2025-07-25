@@ -1,0 +1,110 @@
+/* ---------- PLAYER CARDS ---------- */
+
+.player-card {
+    -fx-min-height: 100;
+    -fx-background-radius: 0 0 18 18;
+    -fx-padding: 18 28 24 28;
+}
+.player-card.active {
+    -fx-border-color: #000000;
+    -fx-border-width: 4;
+    -fx-border-radius: 18;
+}
+
+/* Theme Colours */
+.red   { -fx-background-color: #FFD3D3; }
+.lilac { -fx-background-color: #E0E0FF; }
+.peach { -fx-background-color: #FFDEC3; }
+.pink  { -fx-background-color: #FDC8DE; }
+
+.player-number { -fx-font-size: 40; -fx-font-weight: 900; }
+.player-points { -fx-font-size: 16; -fx-font-weight: 700; }
+.player-name   { -fx-font-size: 13; -fx-font-weight: 700; }
+
+
+/* ---------- QUESTION SECTION ---------- */
+
+.question-block-padding {
+    -fx-padding: 0 0 48 64;
+}
+
+.subtitle {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.manage-btn {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 8 20;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.answer-card {
+    -fx-background-color: white;
+    -fx-padding: 20;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 1);
+}
+
+.answer-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.answer-text {
+    -fx-font-size: 12px;
+    -fx-text-alignment: left;
+}
+
+
+/* ---------- BOTTOM BAR ---------- */
+
+.bottom-bar {
+    -fx-background-color: transparent;
+}
+
+.bottom-buzzer-box {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 20;
+    -fx-background-radius: 16;
+}
+
+.buzz-label {
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+}
+
+.correct-btn {
+    -fx-background-color: #008000;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-padding: 30 30;
+    -fx-background-radius: 12;
+}
+
+.wrong-btn {
+    -fx-background-color: #b22222;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-padding: 30 30;
+    -fx-background-radius: 12;
+}
+
+.timer-label {
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+}
+
+.unlock-btn, .next-btn {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-padding: 10 18;
+    -fx-background-radius: 12;
+}
