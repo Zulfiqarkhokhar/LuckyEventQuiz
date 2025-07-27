@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.controller.EditPlayerPopupController"
+            prefWidth="600">
+
+    <VBox alignment="TOP_LEFT" spacing="20"
+          layoutX="100" layoutY="100"
+          style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);">
+
+        <Label text="Player 02" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+        <Separator/>
+
+        <GridPane hgap="10" vgap="20">
+            <Label text="Buzzer ID" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Label fx:id="buzzerIdLabel" text="ID X1Y2Z3" GridPane.columnIndex="1"/>
+
+            <Label text="Buzzer Color" GridPane.rowIndex="1" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Rectangle fx:id="colorBox" width="20" height="20" arcWidth="5" arcHeight="5"/>
+                <ComboBox fx:id="colorComboBox" prefWidth="150"/>
+            </HBox>
+        </GridPane>
+
+        <HBox spacing="20" alignment="CENTER_RIGHT">
+            <Button text="Cancel" onAction="#onCancel"
+                    style="-fx-border-color: black; -fx-border-width: 1; -fx-background-color: transparent; -fx-font-weight: bold;"/>
+            <Button text="Save Changes" onAction="#onSave"
+                    style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

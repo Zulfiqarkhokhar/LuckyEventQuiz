@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.example.controller.PlayerManagementController"
+           stylesheets="@/css/player-management.css">
+
+    <BorderPane fx:id="mainPane">
+        <center>
+            <VBox alignment="TOP_LEFT" spacing="30">
+                <padding>
+                    <Insets top="60" bottom="60" right="60" left="60"/>
+                </padding>
+
+                <!-- Players Section -->
+                <VBox spacing="10">
+                    <Label text="PLAYERS" styleClass="section-title"/>
+
+                    <FlowPane hgap="20" vgap="20">
+                        <VBox styleClass="player-box">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label styleClass="player-box-label" text="Player 01"/>
+                                <Label styleClass="player-box-label" text="✎" onMouseClicked="#onEditPlayer"/>
+                            </HBox>
+                        </VBox>
+                        <VBox styleClass="player-box">
+                            <HBox spacing="10">
+                                <Label styleClass="player-box-label" text="Player 02"/>
+                                <Label styleClass="player-box-label" text="✎" onMouseClicked="#onEditPlayer"/>
+                            </HBox>
+                        </VBox>
+                        <VBox styleClass="player-box">
+                            <HBox spacing="10">
+                                <Label styleClass="player-box-label" text="Player 02"/>
+                                <Label styleClass="player-box-label" text="✎" onMouseClicked="#onEditPlayer"/>
+                            </HBox>
+                        </VBox><VBox styleClass="player-box">
+                        <HBox spacing="10">
+                            <Label styleClass="player-box-label" text="Player 02"/>
+                            <Label styleClass="player-box-label" text="✎" onMouseClicked="#onEditPlayer"/>
+                        </HBox>
+                    </VBox><VBox styleClass="player-box">
+                        <HBox spacing="10">
+                            <Label styleClass="player-box-label" text="Player 02"/>
+                            <Label styleClass="player-box-label" text="✎" onMouseClicked="#onEditPlayer"/>
+                        </HBox>
+                    </VBox><VBox styleClass="player-box">
+                        <HBox spacing="10">
+                            <Label styleClass="player-box-label" text="Player 02"/>
+                            <Label styleClass="player-box-label" text="✎" onMouseClicked="#onEditPlayer"/>
+                        </HBox>
+                    </VBox><VBox styleClass="player-box">
+                        <HBox spacing="10">
+                            <Label styleClass="player-box-label" text="Player 02"/>
+                            <Label styleClass="player-box-label" text="✎" onMouseClicked="#onEditPlayer"/>
+                        </HBox>
+                    </VBox>
+                        <!-- Add additional players here -->
+                    </FlowPane>
+
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="Add/Remove Player" styleClass="add-remove-label"/>
+                        <Label text="➖"/>
+                        <VBox>
+                            <Label text="🔇" styleClass="mute-icon"/>
+                            <Label text="Max. Players reached" styleClass="warning-label"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Sounds Section -->
+                <VBox spacing="10">
+                    <Label text="SOUNDS" styleClass="section-title"/>
+                    <FlowPane hgap="20" vgap="20">
+                        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="sound-box">
+                            <Label styleClass="sound-box-label" text="Sound 01"/>
+                            <Label styleClass="sound-box-label" text="✎" onMouseClicked="#onEditSound"/>
+                            <Label styleClass="sound-box-label" text="⏸"/>
+                        </HBox>
+                        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="sound-box">
+                            <Label styleClass="sound-box-label" text="Sound 01"/>
+                            <Label styleClass="sound-box-label" text="✎" onMouseClicked="#onEditSound"/>
+                            <Label styleClass="sound-box-label" text="⏸"/>
+                        </HBox><HBox spacing="10" alignment="CENTER_LEFT" styleClass="sound-box">
+                        <Label styleClass="sound-box-label" text="Sound 01"/>
+                        <Label styleClass="sound-box-label" text="✎" onMouseClicked="#onEditSound"/>
+                        <Label styleClass="sound-box-label" text="⏸"/>
+                    </HBox><HBox spacing="10" alignment="CENTER_LEFT" styleClass="sound-box">
+                        <Label styleClass="sound-box-label" text="Sound 01"/>
+                        <Label styleClass="sound-box-label" text="✎" onMouseClicked="#onEditSound"/>
+                        <Label styleClass="sound-box-label" text="⏸"/>
+                    </HBox><HBox spacing="10" alignment="CENTER_LEFT" styleClass="sound-box">
+                        <Label styleClass="sound-box-label" text="Sound 01"/>
+                        <Label styleClass="sound-box-label" text="✎" onMouseClicked="#onEditSound"/>
+                        <Label styleClass="sound-box-label" text="⏸"/>
+                    </HBox><HBox spacing="10" alignment="CENTER_LEFT" styleClass="sound-box">
+                        <Label styleClass="sound-box-label" text="Sound 01"/>
+                        <Label styleClass="sound-box-label" text="✎" onMouseClicked="#onEditSound"/>
+                        <Label styleClass="sound-box-label" text="⏸"/>
+                    </HBox><HBox spacing="10" alignment="CENTER_LEFT" styleClass="sound-box">
+                        <Label styleClass="sound-box-label" text="Sound 01"/>
+                        <Label styleClass="sound-box-label" text="✎" onMouseClicked="#onEditSound"/>
+                        <Label styleClass="sound-box-label" text="⏸"/>
+                    </HBox><HBox spacing="10" alignment="CENTER_LEFT" styleClass="sound-box">
+                        <Label styleClass="sound-box-label" text="Sound 01"/>
+                        <Label styleClass="sound-box-label" text="✎" onMouseClicked="#onEditSound"/>
+                        <Label styleClass="sound-box-label" text="⏸"/>
+                    </HBox>
+                        <!-- Add more sound boxes here -->
+                    </FlowPane>
+                </VBox>
+
+                <!-- Main Question Section -->
+                <VBox spacing="10">
+                    <Label text="MAIN QUESTIONS" styleClass="section-title"/>
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="question-box">
+                        <Label styleClass="question-box-label" text="Image Game – CAN YOU IDENTIFY THIS IMAGE?"/>
+                        <Label styleClass="question-box-label" text="✎"/>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </center>
+    </BorderPane>
+
+    <!-- Popup overlay -->
+    <AnchorPane fx:id="editPlayerPopup" styleClass="popup-pane" visible="false" opacity="0">
+        <VBox alignment="CENTER" spacing="20" styleClass="edit-popup-box">
+            <Label text="Edit Player" styleClass="popup-title"/>
+            <TextField fx:id="buzzerIdField" promptText="Enter Buzzer ID"/>
+            <ColorPicker fx:id="buzzerColorPicker"/>
+            <HBox spacing="10">
+                <Button text="Save" />
+                <Button text="Cancel"/>
+            </HBox>
+        </VBox>
+    </AnchorPane>
+
+    <AnchorPane fx:id="editSoundPopup" styleClass="popup-pane" visible="false" opacity="0">
+        <VBox alignment="CENTER" spacing="20" styleClass="edit-popup-box">
+            <Label text="Edit Sound" styleClass="popup-title"/>
+            <TextField fx:id="soundNameField" promptText="Enter Sound Name"/>
+            <HBox spacing="10" alignment="CENTER">
+                <Label text="Sound File:"/>
+                <Label fx:id="soundFileLabel" text="No file selected" />
+                <Button text="Browse" onAction="#onBrowseSoundFile"/>
+            </HBox>
+            <HBox spacing="10">
+                <Button text="Save" onAction="#onSaveSound"/>
+                <Button text="Cancel" onAction="#onCancelSound"/>
+            </HBox>
+        </VBox>
+    </AnchorPane>
+
+
+</StackPane>

@@ -82,48 +82,39 @@
     </top>
 
 <!--    &lt;!&ndash; CENTER QUESTION AND ANSWERS &ndash;&gt;-->
-<!--    <center>-->
-<!--        <VBox alignment="CENTER" spacing="48" styleClass="question-block-padding">-->
-<!--            <padding>-->
-<!--                <Insets top="20" bottom="20" right="30"/>-->
-<!--            </padding>-->
-<!--            <children>-->
-<!--                &lt;!&ndash; Manage Images Button in Top Right &ndash;&gt;-->
-<!--                <HBox spacing="40" alignment="CENTER_RIGHT">-->
-<!--                    <padding>-->
-<!--                        <Insets top="20" bottom="20" right="30"/>-->
-<!--                    </padding>-->
-<!--                    <Button text="🖼 Manage Images"-->
-<!--                            layoutX="1120" layoutY="20"-->
-<!--                            styleClass="manage-btn" />-->
-<!--                </HBox>-->
+    <center>
+        <VBox alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="20" bottom="20" right="30" left="60"/>
+            </padding>
+            <VBox spacing="20" alignment="CENTER_LEFT" maxWidth="500">
+                <Label text="CURRENT SONG" styleClass="current-song-label"/>
+                <Label text="THIS IS THE NAME OF THE SONG" styleClass="song-title-label"/>
 
-<!--                &lt;!&ndash; Centered Horizontal Layout &ndash;&gt;-->
-<!--                <HBox spacing="40" alignment="CENTER_LEFT">-->
+                <!-- Music Player Box -->
+                <VBox spacing="16" alignment="CENTER" styleClass="music-player-box" maxWidth="500">
+                    <VBox spacing="16" alignment="CENTER" >
+                        <HBox spacing="400" alignment="CENTER_LEFT">
+                            <Label text="0:12" styleClass="time-label"/>
+                            <Label text="2:34" styleClass="time-label"/>
+                        </HBox>
+                    </VBox>
 
-<!--                    &lt;!&ndash; Left: Current Image Section &ndash;&gt;-->
-<!--                    <VBox spacing="10">-->
-<!--                        <Label text="CURRENT IMAGE" styleClass="subtitle"/>-->
-<!--                        <Pane prefWidth="450" prefHeight="300" style="-fx-background-color: white; -fx-border-color: gray;" />-->
-<!--                    </VBox>-->
+                    <!-- Progress bar -->
+                    <Slider fx:id="musicSlider" min="0" max="100" value="20"
+                            styleClass="music-slider" prefWidth="400"/>
 
-<!--                    &lt;!&ndash; Middle: Answer Card &ndash;&gt;-->
-<!--                    <VBox spacing="16" styleClass="answer-card" prefWidth="300" prefHeight="300">-->
-<!--                        <VBox spacing="5">-->
-<!--                            <Label text="Answer A" styleClass="answer-title"/>-->
-<!--                            <Label text="This is the answer 01 to the question which is asked above."-->
-<!--                                   wrapText="true" styleClass="answer-text"/>-->
-<!--                        </VBox>-->
-<!--                        <VBox spacing="5">-->
-<!--                            <Label text="Progress" styleClass="answer-title"/>-->
-<!--                            <ProgressBar progress="0.3" prefWidth="200" style="-fx-accent: green;" />-->
-<!--                        </VBox>-->
-<!--                    </VBox>-->
-<!--                </HBox>-->
-<!--            </children>-->
-<!--        </VBox>-->
+                    <!-- Playback controls -->
+                    <HBox spacing="40" alignment="CENTER">
+                        <Button text="⏮" styleClass="music-button"/>
+                        <Button text="▶" styleClass="music-button"/>
+                        <Button text="⏭" styleClass="music-button"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </VBox>
+    </center>
 
-<!--    </center>-->
 
     <bottom>
         <HBox alignment="CENTER_LEFT" spacing="40" styleClass="bottom-bar">

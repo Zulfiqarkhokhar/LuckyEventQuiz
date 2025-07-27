@@ -1,0 +1,94 @@
+.branding-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.branding-subtitle {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
+
+.form-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.hint-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #666;
+}
+
+.upload-box {
+    -fx-border-color: #ccc;
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+    -fx-padding: 40;
+    -fx-background-color: #fff;
+    -fx-pref-width: 250;
+}
+
+.upload-label {
+    -fx-text-fill: #e67e22;
+    -fx-font-weight: bold;
+}
+
+.upload-format {
+    -fx-font-size: 10px;
+    -fx-text-fill: #666;
+}
+
+.preview-box {
+    -fx-background-radius: 20;
+    -fx-padding: 20;
+    -fx-background-color: #fff;
+}
+
+.preview-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.preview-text {
+    -fx-font-weight: normal;
+    -fx-font-size: 14px;
+}
+
+.highlighted-text {
+    -fx-text-fill: #EEB431;
+    -fx-font-weight: bold;
+}
+
+.color-swatch {
+    -fx-background-color: #EEB431;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+    -fx-border-color: #999;
+    -fx-border-width: 1;
+}
+
+.hex-code {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.reset-button, .save-button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 24;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+}
+
+.reset-button {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-background-radius: 20;
+}
+
+.save-button {
+    -fx-background-radius: 20;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}

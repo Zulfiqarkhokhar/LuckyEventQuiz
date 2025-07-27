@@ -17,6 +17,7 @@ public class Main extends Application {
         primaryStage.setTitle("Lucky Event");
         primaryStage.setScene(splashScene);
         primaryStage.show();
+        primaryStage.setFullScreen(true);
 
         PauseTransition delay = new PauseTransition(Duration.seconds(3.5));
         delay.setOnFinished(event -> Dashboard.show(primaryStage));

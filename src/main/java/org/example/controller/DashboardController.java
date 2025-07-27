@@ -2,10 +2,13 @@ package org.example.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+
+import java.io.IOException;
 
 public class DashboardController {
 
@@ -46,6 +49,35 @@ public class DashboardController {
                 Stage stage = (Stage) gameModeBtn.getScene().getWindow();
                 stage.getScene().setRoot(gameModeRoot);
             } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        playerBtn.setOnAction(e -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/PlayerManagement.fxml"));
+                Stage stage = (Stage) playerBtn.getScene().getWindow();
+                Scene scene = new Scene(root);
+
+                scene.getStylesheets().add(getClass().getResource("/css/player-management.css").toExternalForm());
+                stage.setScene(scene);
+                stage.setFullScreen(true);
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        brandingBtn.setOnAction(e -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/BrandingSettings.fxml"));
+                Stage stage = (Stage) brandingBtn.getScene().getWindow();
+                Scene scene = new Scene(root);
+
+                scene.getStylesheets().add(getClass().getResource("/css/branding-settings.css").toExternalForm());
+                stage.setScene(scene);
+                stage.setFullScreen(true);
+
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         });
