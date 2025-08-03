@@ -50,7 +50,7 @@ public class AudioQuestionController {
         playPauseButton.setStyle("-fx-font-size: 40;");   // default for ▶
 
         /* 3 ─ load demo track */
-        loadAudio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
+//        loadAudio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
     }
 
     /* ───────────────────────────────────────── helpers ───────────────────────────────────────── */

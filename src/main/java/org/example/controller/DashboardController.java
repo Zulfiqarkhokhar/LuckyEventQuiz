@@ -81,5 +81,33 @@ public class DashboardController {
                 ex.printStackTrace();
             }
         });
+        mediaBtn.setOnAction(e -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/MediaLibrary.fxml"));
+                Stage stage = (Stage) mediaBtn.getScene().getWindow();
+                Scene scene = new Scene(root);
+
+                scene.getStylesheets().add(getClass().getResource("/css/media.css").toExternalForm());
+                stage.setScene(scene);
+                stage.setFullScreen(true);
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        startGameBtn.setOnAction(e -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/AudioQuestion.fxml"));
+                Stage stage = (Stage) startGameBtn.getScene().getWindow();
+                Scene scene = new Scene(root);
+
+                scene.getStylesheets().add(getClass().getResource("/fxml/questions.css").toExternalForm());
+                stage.setScene(scene);
+                stage.setFullScreen(true);
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 }
