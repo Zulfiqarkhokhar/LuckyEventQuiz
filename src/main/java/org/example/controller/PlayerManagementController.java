@@ -32,10 +32,10 @@ public class PlayerManagementController {
     @FXML
     private void onEditPlayer() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SoundEditPopup.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EditPlayerPopup.fxml"));
             Parent popupContent = loader.load();
 
-            SoundEditPopupController controller = loader.getController();
+            EditPlayerPopupController controller = loader.getController();
             controller.setOnClose(this::hideSoundPopup);  // ✅ set the callback
 
             editSoundPopup.getChildren().setAll(popupContent);

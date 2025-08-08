@@ -1,0 +1,13 @@
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    score INTEGER DEFAULT 0
+);
+
+CREATE TABLE questions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    question_text TEXT,
+    image_path TEXT,
+    audio_path TEXT,
+    correct_answer TEXT
+);

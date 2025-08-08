@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.db.DatabaseManager;
 
 public class Main extends Application {
 
@@ -25,6 +26,13 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        DatabaseManager.initializeDatabase();
+
+        // Verify tables were created
+        DatabaseManager.checkTablesExist();
+
+        System.out.println("Database setup complete!");
         launch(args);
+
     }
 }
