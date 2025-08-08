@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.db.DatabaseManager;
 
 public class Main extends Application {
 
@@ -17,13 +18,21 @@ public class Main extends Application {
         primaryStage.setTitle("Lucky Event");
         primaryStage.setScene(splashScene);
         primaryStage.show();
+        primaryStage.setFullScreen(true);
 
         PauseTransition delay = new PauseTransition(Duration.seconds(3.5));
-        delay.setOnFinished(event -> AudioViewScreen.show(primaryStage));
+        delay.setOnFinished(event -> Dashboard.show(primaryStage));
         delay.play();
     }
 
     public static void main(String[] args) {
+        DatabaseManager.initializeDatabase();
+
+        // Verify tables were created
+        DatabaseManager.checkTablesExist();
+
+        System.out.println("Database setup complete!");
         launch(args);
+
     }
 }

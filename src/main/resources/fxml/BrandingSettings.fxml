@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.controller.BrandingSettingsController"
+            style="-fx-background-color: #f5f5f5;">
+
+    <center>
+        <VBox spacing="40" alignment="TOP_CENTER">
+            <padding><Insets top="60" bottom="60" left="60" right="60"/></padding>
+
+            <!-- Heading -->
+            <VBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="LUCKY EVENT" styleClass="branding-title"/>
+                <Label text="BRANDING SETTINGS" styleClass="branding-subtitle"/>
+            </VBox>
+
+            <!-- Logo and Primary Color Section -->
+            <HBox spacing="80" alignment="TOP_LEFT">
+                <VBox spacing="20" alignment="TOP_LEFT" styleClass="preview-box">
+                    <Label text="Logo" styleClass="form-label"/>
+                    <Label text="Make sure to have a resolution of atleast 00x00px for optimal display"
+                           styleClass="hint-label"/>
+                    <VBox spacing="10" alignment="CENTER" styleClass="upload-box">
+                        <Label text="Click to upload" styleClass="upload-label"/>
+                        <Label text=".JPG, .PNG, or .GIF (max. Xmb)" styleClass="upload-format"/>
+                    </VBox>
+                    <Label text="Preview" styleClass="form-label"/>
+                    <Label text="Lucky" styleClass="preview-text"><Label text="event" styleClass="highlighted-text"/></Label>
+                </VBox>
+
+                <!-- Preview Box -->
+                <VBox spacing="10" alignment="TOP_LEFT">
+                    <Label text="PREVIEW" styleClass="preview-title"/>
+                    <TextArea wrapText="true" editable="false" prefHeight="140" prefWidth="400"
+                              text="THIS IS THE QUESTION THAT IS BEING ASK\nTO THE PLAYERS WHICH SHOULD BUZZ AS\nSOON AS THEY KNOW THE ANSWER."/>
+                    <Label text="Lucky" styleClass="preview-text"><Label text="event" styleClass="highlighted-text"/></Label>
+                </VBox>
+            </HBox>
+
+            <!-- Color Picker -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+                <Label text="Primary Color" styleClass="form-label"/>
+                <Label fx:id="colorBox" styleClass="color-swatch"/>
+                <Label text="Hex-Code: " styleClass="form-label"/>
+                <Label fx:id="hexCodeLabel" text="#EEB431" styleClass="hex-code"/>
+            </HBox>
+
+            <!-- Buttons -->
+            <HBox spacing="30" alignment="BOTTOM_RIGHT">
+                <Button text="Reset Settings" fx:id="resetBtn" styleClass="reset-button"/>
+                <Button text="Save Settings" fx:id="saveBtn" styleClass="save-button"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

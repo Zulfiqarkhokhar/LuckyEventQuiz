@@ -28,7 +28,7 @@
                    pickOnBounds="true"
                    onMouseClicked="#handleAddQuestion">
             <image>
-                <Image url="@../icons/plus_disabled.png"/>
+<!--                <Image url="@../icons/plus_disabled.png"/>-->
             </image>
         </ImageView>
     </HBox>

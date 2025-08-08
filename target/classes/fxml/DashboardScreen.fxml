@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Pos?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.example.controller.DashboardController">
 
+    <!-- Top navigation bar -->
     <top>
         <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-background-color: #d3d3d3;">
             <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
+                <Insets top="15" bottom="15" left="15" right="15"/>
             </padding>
+
             <Button fx:id="playerBtn" text="Player Management" styleClass="black-button"/>
             <Button fx:id="mediaBtn" text="Media Library" styleClass="black-button"/>
             <Button fx:id="brandingBtn" text="Branding Settings" styleClass="black-button"/>
@@ -21,36 +23,44 @@
         </HBox>
     </top>
 
+    <!-- Main center content -->
     <center>
         <StackPane>
-            <VBox alignment="TOP_LEFT" spacing="30" style="-fx-background-color: #f2f2f2;">
+            <VBox alignment="TOP_LEFT" spacing="40" style="-fx-background-color: #f2f2f2;">
                 <padding>
-                    <Insets top="40" right="40" bottom="40" left="40"/>
+                    <Insets top="60" bottom="60" left="60" right="60"/>
                 </padding>
 
+                <!-- Current Game Section -->
                 <VBox spacing="4">
                     <Label fx:id="currentGameLabel" text="CURRENT GAME" styleClass="section-heading"/>
-                    <Label text="Lucky Wheel Round 1" styleClass="section-value"/>
+                    <Label text="CURRENT GAME" styleClass="section-value"/>
                 </VBox>
 
+                <!-- Players Section -->
                 <VBox spacing="4">
                     <Label fx:id="playersLabel" text="PLAYERS" styleClass="section-heading"/>
                     <Label text="09" styleClass="section-value"/>
                 </VBox>
 
+                <!-- Game Status Section -->
                 <VBox spacing="4">
                     <Label fx:id="statusLabel" text="STATUS" styleClass="section-heading"/>
-                    <Label text="READY" styleClass="section-value"/>
+                    <Label text="GAME STATUS" styleClass="section-value"/>
                 </VBox>
             </VBox>
 
+            <!-- Start Game Button -->
             <Button fx:id="startGameBtn" text="Start Game" styleClass="start-button"
                     StackPane.alignment="BOTTOM_RIGHT">
+                <StackPane.margin>
+                    <Insets top="0" right="50" bottom="20" left="0"/>
+                </StackPane.margin>
                 <graphic>
-                    <Label text="▶"/>
+                    <Label text="▶" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
                 </graphic>
             </Button>
+
         </StackPane>
     </center>
-
 </BorderPane>

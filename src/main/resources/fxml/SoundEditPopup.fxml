@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.controller.SoundEditPopupController"
+            prefWidth="500" prefHeight="400"
+            style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4);">
+
+    <VBox spacing="20" alignment="TOP_CENTER"
+          AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+
+        <!-- Header -->
+        <VBox>
+            <Label text="Sound 01 (Name)" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+            <Separator />
+        </VBox>
+
+        <!-- Current Sound Info -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Current Sound" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+            <Label fx:id="currentSoundLabel" text="fgsoundvg.mp3" />
+            <Button text="▶" fx:id="playButton" onAction="#onPlay"/>
+        </HBox>
+
+        <!-- Time Slider -->
+        <VBox spacing="5">
+            <Slider fx:id="timeSlider" min="0" max="100" value="12" />
+            <HBox spacing="10" alignment="CENTER">
+                <Label fx:id="currentTimeLabel" text="0:12" />
+                <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
+                <Label fx:id="durationLabel" text="2:34" />
+            </HBox>
+        </VBox>
+
+        <!-- Upload Area -->
+        <VBox fx:id="uploadBox" spacing="10" alignment="CENTER"
+              style="-fx-border-color: #ccc; -fx-border-style: dashed; -fx-border-radius: 8;
+                     -fx-background-radius: 8; -fx-padding: 30;"
+              onMouseClicked="#onChooseFile">
+            <ImageView fx:id="uploadIcon" fitHeight="40" fitWidth="40" />
+            <Label text="Click to upload" style="-fx-text-fill: #f97316; -fx-font-weight: bold;" />
+            <Label text="or drag and drop\n.MP3, .AAC, .WAV, .FLAC or .OGG (max. Xmb)"
+                   wrapText="true" textAlignment="CENTER" />
+        </VBox>
+
+        <!-- Buttons -->
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button text="Cancel" fx:id="cancelButton" styleClass="cancel-button" onAction="#onCancel" />
+            <Button text="Save Sound" fx:id="saveButton" styleClass="save-button" onAction="#onSave" />
+        </HBox>
+    </VBox>
+</AnchorPane>
