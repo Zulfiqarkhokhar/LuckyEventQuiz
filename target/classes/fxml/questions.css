@@ -125,3 +125,6 @@
     -fx-background-radius: 18;
 }
 
+.clickable-icon {
+    -fx-cursor: hand;
+}

@@ -10,12 +10,13 @@
             prefWidth="1392" prefHeight="768"
             stylesheets="@question-view.css">
 
+
     <Label text="QUESTIONS"
            styleClass="title" AnchorPane.leftAnchor="60" AnchorPane.topAnchor="35"/>
 
-    <HBox spacing="6" AnchorPane.rightAnchor="60" AnchorPane.topAnchor="25"
+    <HBox spacing="6" AnchorPane.rightAnchor="60" AnchorPane.topAnchor="50"
           alignment="CENTER_RIGHT">
-        <VBox alignment="CENTER_RIGHT" spacing="2">
+        <VBox alignment="BOTTOM_RIGHT" spacing="2">
             <Label text="Add Question" styleClass="add-label"/>
             <Label fx:id="maxLabel"
                    text="Max. Questions reached"
@@ -23,31 +24,49 @@
         </VBox>
 
         <!-- crossed-out plus as disabled icon -->
-        <ImageView fx:id="addIcon"
-                   fitWidth="32" fitHeight="32"
+        <ImageView fx:id="addDisabledIcon"
+                   fitWidth="25" fitHeight="25"
                    pickOnBounds="true"
-                   onMouseClicked="#handleAddQuestion">
+                   style="-fx-cursor: not-allowed;"
+                   onMouseClicked="#handleAddQuestion"
+                   visible="false"
+        >
             <image>
-<!--                <Image url="@../icons/plus_disabled.png"/>-->
+                <Image url="@../icons/Plus_Max.png"/>
+            </image>
+        </ImageView>
+
+        <!-- crossed-out plus as disabled icon -->
+        <ImageView fx:id="addIcon"
+                   fitWidth="15" fitHeight="15"
+                   pickOnBounds="true"
+                   onMouseClicked="#handleAddQuestion"
+                   visible="false"
+                   styleClass="clickable-icon"
+        >
+            <image>
+                <Image url="@../icons/Plus.png"/>
             </image>
         </ImageView>
     </HBox>
 
     <ScrollPane fx:id="questionScroll"
-                AnchorPane.leftAnchor="60" AnchorPane.rightAnchor="60"
+                AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30"
                 AnchorPane.topAnchor="95" AnchorPane.bottomAnchor="130"
+                style="-fx-padding: 0 30 0 30;"
                 hbarPolicy="NEVER" fitToWidth="true">
         <content>
             <VBox fx:id="questionContainer" spacing="18" fillWidth="true"/>
         </content>
     </ScrollPane>
 
+
     <HBox spacing="24" alignment="BASELINE_CENTER"
           AnchorPane.bottomAnchor="40" AnchorPane.rightAnchor="60">
-        <Button fx:id="csvBtn"   text="CSV Upload"      styleClass="secondary-btn"/>
-        <Button fx:id="resetBtn" text="Reset Questions" styleClass="secondary-btn"
+        <Button fx:id="csvBtn"   text="CSV Upload"  onAction="#handleCsvUpload"    styleClass="secondary-btn, clickable-icon"/>
+        <Button fx:id="resetBtn" text="Reset Questions" styleClass="secondary-btn, clickable-icon"
                 onAction="#resetQuestions"/>
-        <Button fx:id="saveBtn"  text="Save Questions"  styleClass="primary-btn"
+        <Button fx:id="saveBtn"  text="Save Questions"  styleClass="primary-btn, clickable-icon"
                 onAction="#saveQuestions"/>
     </HBox>
 </AnchorPane>

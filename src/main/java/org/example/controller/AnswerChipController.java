@@ -19,6 +19,10 @@ public class AnswerChipController {
     public String getText()         { return textField.getText(); }
     public void   setText(String s) { textField.setText(s); }
     public void   requestFocus()    { textField.requestFocus(); }
+    public TextField getTextField() {
+        return textField;
+    }
+
 
     /* delete icon click */
     @FXML private void handleDelete() { onDelete.run(); }

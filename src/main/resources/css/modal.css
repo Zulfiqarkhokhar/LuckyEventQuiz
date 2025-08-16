@@ -1,39 +1,59 @@
-/* Full-screen translucent black */
+/* overlay dim background */
 .overlay {
     -fx-background-color: rgba(0,0,0,0.54);
 }
 
-/*** WHITE CARD **********************************************************/
+/* white card */
 .modal-card {
     -fx-background-color: #ffffff;
-    -fx-background-radius: 18;
-    -fx-padding: 0 0 90 0; /* bottom padding for button row */
+    -fx-background-radius: 28;
 }
 
-/*** TEXT FIELD FOR QUESTION *********************************************/
+/*** question text field **************************************************/
 .question-field {
-    -fx-font-size: 17px;
+    -fx-font-size: 20px;
     -fx-font-weight: 700;
     -fx-background-color: transparent;
-    -fx-border-color: transparent;
+    -fx-border-color: transparent transparent #999 transparent;
+    -fx-border-width: 0 0 2 0;
 }
 
-/*** “Add Answer” text ****************************************************/
-.add-label { -fx-font-weight: 600; -fx-font-size: 15px; }
+/*** “Add Answer” ******************************************************/
+.add-label {
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+}
 
-/*** ANSWER CHIP **********************************************************/
+/*** ScrollPane for chips **************************************************/
+.chip-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 10;
+}
+.chip-scroll .viewport {
+    -fx-background-color: transparent;
+}
+.chip-scroll .scroll-bar:vertical {
+    -fx-pref-width: 12;
+}
+.chip-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #cccccc;
+    -fx-background-radius: 8;
+}
+
+/*** Pill-style answer chip used in FlowPane ********************************/
 .answer-chip {
     -fx-background-color: transparent;
-    -fx-border-radius: 18;
     -fx-border-color: #bdbdbd;
     -fx-border-width: 2;
-    -fx-padding: 14 20;
-    -fx-min-width: 300;
+    -fx-border-radius: 28;
+    -fx-padding: 20 30;
+    -fx-min-width: 320;
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
 }
-
 .answer-chip:hover {
     -fx-border-color: #e07d1e;
-    -fx-transition: all 0.18s ease-in-out;
 }
 
 /* TEXT-INPUT inside pill */
@@ -43,35 +63,62 @@
     -fx-font-size: 15px;
     -fx-font-weight: 600;
 }
-
-/* compact black pill button */
 .primary-btn.small {
-    -fx-pref-height: 38;      /* height exactly like mock-up */
-    -fx-font-size: 14px;
+    -fx-pref-height: 38;
+    -fx-font-size: 16px;
     -fx-font-weight: 700;
-
-    /* pill shape */
     -fx-background-color: #000000;
-    -fx-background-radius: 20;   /* half of height ≈ full pill */
-
-    /* text colour */
+    -fx-background-radius: 20;
     -fx-text-fill: #ffffff;
-
-    /* left / right padding */
-    -fx-padding: 0 24 0 24;
+    -fx-padding: 12 24 12 24;
 }
 
-/* existing rule — keeps hover outline & no jitter */
-.answer-chip {
+.clickable-icon {
+    -fx-cursor: hand;
+}
+
+/* scrollbar track / thumb colouring */
+.scroll-pane .viewport        { -fx-background-color: transparent; }
+/* ───────── CUSTOM VERTICAL SCROLLBAR ───────── */
+
+.scroll-bar:vertical {
+    -fx-pref-width: 11px;
+}
+
+/* Remove the up/down arrow buttons */
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-padding: 0;
     -fx-background-color: transparent;
-    -fx-border-radius: 18;
-    -fx-border-color: #bdbdbd;
-    -fx-border-width: 2;
-    -fx-padding: 14 20;
-    -fx-min-width: 300;
-    -fx-transition: all 0.18s ease-in-out;
+    -fx-shape: "";
 }
-.answer-chip:hover { -fx-border-color: #e07d1e; }
+
+/* Track background */
+.scroll-bar:vertical .track {
+    -fx-background-color: #D9D9D9;
+    -fx-background-radius: 10;
+    -fx-padding: 6;
+}
+
+/* The actual scroll thumb */
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #E07D1E;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10 10 10 10;
+    -fx-padding: 6;
+}
+/* Remove tiny arrow icons/buttons from vertical scrollbar */
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow,
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button,
+.scroll-bar:vertical .increment-arrow-button,
+.scroll-bar:vertical .decrement-arrow-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-shape: "";
+    -fx-opacity: 0;
+}
 
 
 /*** BUTTON (re-use from question_view.css) ******************************/
