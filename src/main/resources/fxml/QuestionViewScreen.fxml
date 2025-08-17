@@ -17,7 +17,7 @@
     <HBox spacing="6" AnchorPane.rightAnchor="60" AnchorPane.topAnchor="50"
           alignment="CENTER_RIGHT">
         <VBox alignment="BOTTOM_RIGHT" spacing="2">
-            <Label text="Add Question" styleClass="add-label"/>
+            <Label text="Add Question" styleClass="add-label, clickable-icon" onMouseClicked="#handleAddQuestion"/>
             <Label fx:id="maxLabel"
                    text="Max. Questions reached"
                    styleClass="max-label" visible="false"/>
@@ -36,7 +36,7 @@
             </image>
         </ImageView>
 
-        <!-- crossed-out plus as disabled icon -->
+        <!--  plus icon -->
         <ImageView fx:id="addIcon"
                    fitWidth="15" fitHeight="15"
                    pickOnBounds="true"

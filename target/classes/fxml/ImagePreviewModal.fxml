@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<StackPane fx:id="overlay"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.example.controller.ImagePreviewModalController"
+           alignment="CENTER"
+           styleClass="upload-overlay"
+           stylesheets="@/css/upload.css"
+           onMouseClicked="#handleBackgroundClick">
+
+    <!-- white card -->
+    <VBox fx:id="card"
+          spacing="18"
+          alignment="CENTER"
+          prefWidth="900" prefHeight="650"
+          styleClass="upload-card"
+          onMouseClicked="#consumeClick">
+
+        <ImageView fx:id="previewImage"
+                   preserveRatio="true"
+                   fitWidth="850" fitHeight="600"/>
+
+    </VBox>
+</StackPane>

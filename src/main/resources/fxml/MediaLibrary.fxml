@@ -22,7 +22,7 @@
         <VBox fx:id="cardQuestions" styleClass="media-card">
             <StackPane styleClass="card-top" prefHeight="180">
                 <ImageView fitWidth="96" preserveRatio="true">
-                    <image><Image url="@../icons/icon-plus.png"/></image>
+                    <image><Image url="@../icons/media_library_question.png"/></image>
                 </ImageView>
             </StackPane>
             <Label text="Questions" styleClass="card-label"/>

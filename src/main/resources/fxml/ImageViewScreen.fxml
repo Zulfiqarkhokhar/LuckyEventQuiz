@@ -10,24 +10,32 @@
             prefWidth="1392" prefHeight="768"
             stylesheets="@/css/images.css">
 
-    <Label text="IMAGES"
-           styleClass="title"
+    <Label text="IMAGES" styleClass="title"
            AnchorPane.leftAnchor="60" AnchorPane.topAnchor="35"/>
 
-    <HBox spacing="6"
-          AnchorPane.rightAnchor="60" AnchorPane.topAnchor="25"
-          alignment="CENTER_RIGHT">
-        <VBox alignment="CENTER" spacing="2">
-            <Label text="Add Image" styleClass="add-label"/>
+    <HBox spacing="6" AnchorPane.rightAnchor="60" AnchorPane.topAnchor="25" alignment="CENTER_RIGHT">
+        <VBox alignment="CENTER" spacing="2" onMouseClicked="#handleAddImage" >
+            <Label text="Add Image" styleClass="add-label, clickable-icon"/>
             <Label fx:id="maxLabel"
                    text="Max. Images reached"
-                   styleClass="max-label" visible="false"/>
+                   style="-fx-cursor: not-allowed;"
+                   styleClass="max-label" visible="false" managed="false"/>
         </VBox>
-        <ImageView fx:id="addIcon"
-                   fitWidth="32" fitHeight="32"
+        <ImageView fx:id="addDisabledIcon"
+                   fitWidth="25" fitHeight="25"
+                   style="-fx-cursor: not-allowed;"
                    pickOnBounds="true"
+                   visible="false" managed="false"
+                   >
+            <image><Image url="@../icons/Plus_Max.png"/></image>
+        </ImageView>
+        <ImageView fx:id="addIcon"
+                   fitWidth="15" fitHeight="15"
+                   pickOnBounds="true"
+                   styleClass="clickable-icon"
+                   visible="false" managed="false"
                    onMouseClicked="#handleAddImage">
-            <image><Image url="@../icons/icon-plus.png"/></image>
+            <image><Image url="@../icons/Plus.png"/></image>
         </ImageView>
     </HBox>
 
@@ -35,21 +43,27 @@
                 AnchorPane.leftAnchor="60" AnchorPane.rightAnchor="60"
                 AnchorPane.topAnchor="95" AnchorPane.bottomAnchor="130"
                 hbarPolicy="NEVER" fitToWidth="true">
+
         <content>
-            <!-- FlowPane lets us wrap rows; controller sizes cards -->
-            <FlowPane fx:id="imageFlow"
-                      hgap="60" vgap="60"
-            alignment="TOP_CENTER"
-            prefWrapLength="800"/>
+            <!-- This StackPane makes empty-state sit ON TOP of imagePane -->
+            <StackPane fx:id="contentWrapper">
+
+                <TilePane fx:id="imagePane"
+                          prefColumns="3"
+                          hgap="50" vgap="50" />
+
+                <!-- EMPTY STATE centered in content area -->
+                <fx:include fx:id="emptyState" source="/fxml/EmptyState.fxml"/>
+
+            </StackPane>
         </content>
     </ScrollPane>
 
+
+
     <HBox spacing="24" alignment="BASELINE_RIGHT"
-          AnchorPane.bottomAnchor="40" AnchorPane.rightAnchor="60">
-        <Button fx:id="csvBtn"   text="CSV Upload"    styleClass="secondary-btn"/>
-        <Button fx:id="resetBtn" text="Reset Images"  styleClass="secondary-btn"
-                onAction="#resetImages"/>
-        <Button fx:id="saveBtn"  text="Save Images"   styleClass="primary-btn"
-                onAction="#saveImages"/>
+          AnchorPane.rightAnchor="60" AnchorPane.bottomAnchor="40">
+        <Button text="Reset Images" styleClass="secondary-btn, clickable-icon" onAction="#resetImages"/>
+        <Button text="Save Images"  styleClass="primary-btn, clickable-icon" onAction="#saveImages"/>
     </HBox>
 </AnchorPane>

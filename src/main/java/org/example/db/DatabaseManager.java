@@ -16,7 +16,7 @@ public class DatabaseManager {
     }
 
     /**
-     * Initializes DB with users, questions, and question_options tables
+     * Initializes DB with users, questions, options and musics table.
      */
     public static void initializeDatabase() {
         String createUsersTable = "CREATE TABLE IF NOT EXISTS users (" +
@@ -39,18 +39,35 @@ public class DatabaseManager {
                 "FOREIGN KEY(question_id) REFERENCES questions(id)" +
                 ")";
 
+        String createMusicTable = "CREATE TABLE IF NOT EXISTS musics (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "title TEXT NOT NULL, " +
+                "file_name TEXT NOT NULL, " +
+                "file_path TEXT NOT NULL" +
+                ")";
+
+        String createImagesTable = "CREATE TABLE IF NOT EXISTS images (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "title TEXT NOT NULL, " +
+                "file_name TEXT NOT NULL, " +
+                "file_path TEXT NOT NULL" +
+                ")";
+
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {
 
             stmt.execute(createUsersTable);
             stmt.execute(createQuestionsTable);
             stmt.execute(createOptionsTable);
+            stmt.execute(createMusicTable);
+            stmt.execute(createImagesTable);
 
             System.out.println("Database initialized successfully");
         } catch (SQLException e) {
             System.out.println("Error initializing database: " + e.getMessage());
         }
     }
+
 
     /**
      * Checks if DB tables exist
@@ -67,6 +84,12 @@ public class DatabaseManager {
             }
             try (ResultSet rs = meta.getTables(null, null, "question_options", null)) {
                 System.out.println("QuestionOptions table exists: " + rs.next());
+            }
+            try (ResultSet rs = meta.getTables(null, null, "musics", null)) {
+                System.out.println("Musics table exists: " + rs.next());
+            }
+            try (ResultSet rs = meta.getTables(null, null, "images", null)) {
+                System.out.println("Images table exists: " + rs.next());
             }
 
         } catch (SQLException e) {

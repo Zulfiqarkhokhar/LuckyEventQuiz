@@ -6,176 +6,198 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import org.example.db.DatabaseManager;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Controller for the Images grid screen.
- * • 3 → 2 → 1 responsive columns centred in view
- * • "Add Image" opens UploadImageModal (click or drag‑and‑drop)
- * • each card supports delete / upload / preview (stub)
- */
 public class ImagesViewController {
 
-    /* ────────── FXML refs ────────── */
-    @FXML private FlowPane  imageFlow;
-    @FXML private ImageView addIcon;
-    @FXML private Label     maxLabel;
+    @FXML private TilePane imagePane;
+    @FXML private ImageView addIcon, addDisabledIcon;
+    @FXML private Label maxLabel;
+    @FXML private VBox emptyState;
 
-    /* ────────── Config ────────── */
-    private static final int    MAX_IMAGES     = 6;    // can raise later
-    private static final double H_GAP          = 60;   // must equal imageFlow hgap
-    private static final double TARGET_CARD_W  = 340;  // desktop size
-    private static final double MIN_CARD_W     = 280;  // never narrower
-    private static final String SAMPLE_TITLE   = "Image 01";
+    private static final int MAX_IMAGES = 6;
+    private final List<Node> cards = new ArrayList<>();
 
-    /* Track card nodes for resize / delete */
-    private final List<Node> cardNodes = new ArrayList<>();
-
-    /* ═════════════════ INITIALISE ═════════════════ */
     @FXML
     private void initialize() {
-        /* 6 sample cards */
-        for (int i = 0; i < 6; i++) addImageCard(SAMPLE_TITLE);
+        loadFromDB();
+        updateAddAvailability();
+        updateEmptyState();
+    }
 
-        /* responsive listener */
-        imageFlow.widthProperty().addListener(
-                (obs, oldV, newV) -> updateResponsiveLayout(newV.doubleValue()));
-
+    /* === Load existing images from DB === */
+    private void loadFromDB(){
+        imagePane.getChildren().clear();
+        cards.clear();
+        try(Connection c = DatabaseManager.connect()){
+            PreparedStatement st = c.prepareStatement("SELECT * FROM images");
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String fileName = rs.getString("file_name");
+                String path = rs.getString("file_path");
+                addImageCard(id, title, fileName, new File(path));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        updateEmptyState();
         updateAddAvailability();
     }
 
-    /* ═════════════════ Responsive layout ═════════════════ */
-    private void updateResponsiveLayout(double availableW) {
-        if (availableW <= 0) return;
-
-        /* 1. pick starting columns based on TARGET width, clamp 1..3 */
-        int columns = Math.max(1,
-                Math.min(3,
-                        (int) ((availableW + H_GAP) / (TARGET_CARD_W + H_GAP))));
-
-        /* 2. ensure width not < MIN; drop columns if necessary */
-        while (columns > 1) {
-            double candidate = (availableW - (columns - 1) * H_GAP) / columns;
-            if (candidate >= MIN_CARD_W) break;
-            columns--;
-        }
-
-        /* 3. integer card width prevents jitter */
-        int cardW = (int) Math.floor(
-                (availableW - (columns - 1) * H_GAP) / columns);
-
-        /* 4. centre rows by setting FlowPane wrap length */
-        double rowW = columns * cardW + (columns - 1) * H_GAP;
-        imageFlow.setPrefWrapLength(rowW);
-
-        /* 5. apply width only if changed > 0.5 px */
-        for (Node n : cardNodes) {
-            Region r = (Region) n;
-            if (Math.abs(r.getPrefWidth() - cardW) > 0.5) r.setPrefWidth(cardW);
-        }
-    }
-
-    /* ═════════════ Card factory helpers ═════════════ */
-
-    /** Low‑level: create card, wire callbacks, add to grid; returns controller. */
-    private ImageCardController makeCard(String title) {
+    /* === Create Card in UI === */
+    private void addImageCard(int id, String title, String fileName, File file){
         try {
-            FXMLLoader fx = new FXMLLoader(
-                    getClass().getResource("/fxml/ImageCard.fxml"));
+            FXMLLoader fx = new FXMLLoader(getClass().getResource("/fxml/ImageCard.fxml"));
             Node cardNode = fx.load();
             ImageCardController ctrl = fx.getController();
 
+            ctrl.setId(id);
             ctrl.setTitle(title);
+            if(file.exists()){
+                ctrl.setImage(new Image(file.toURI().toString(), true));
+            }
 
-            /* callbacks */
             ctrl.setDeleteCallback(() -> {
-                imageFlow.getChildren().remove(cardNode);
-                cardNodes.remove(cardNode);
+                deleteFromDB(id, file);
+                imagePane.getChildren().remove(cardNode);
+                cards.remove(cardNode);
+                updateEmptyState();
                 updateAddAvailability();
+                Snackbar.success(getWindow(),"Deleted");
             });
-            ctrl.setUploadCallback(this::chooseAndLoadImage);
-            ctrl.setExpandCallback(this::showPreview);
 
-            imageFlow.getChildren().add(cardNode);
-            cardNodes.add(cardNode);
+            // use modal for replace
+            ctrl.setUploadCallback(c -> openUploadModal(ctrl));
+            ctrl.setExpandCallback(this::showLightbox);
 
-            /* first sizing */
-            updateResponsiveLayout(imageFlow.getWidth());
-            return ctrl;
+            imagePane.getChildren().add(cardNode);
+            cards.add(cardNode);
 
-        } catch (IOException ex) {
-            throw new RuntimeException("Cannot load ImageCard.fxml", ex);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    /** Blank card. */
-    private void addImageCard(String title) {
-        makeCard(title);
+    /* === Top + button === */
+    @FXML private void handleAddImage(){
+        if(cards.size() >= MAX_IMAGES){
+            Snackbar.warning(getWindow(),"Limit","Max " + MAX_IMAGES);
+            return;
+        }
+        // open drag-drop modal rather than direct FileChooser
+        UploadImageModalController.open(getWindow(), file -> {
+            try {
+                File dest = copyToUploads(file);
+                int newId = insertIntoDB(file.getName(), dest.getAbsolutePath());
+                addImageCard(newId, file.getName(), file.getName(), dest);
+                Snackbar.success(getWindow(),"Added");
+                updateEmptyState();
+                updateAddAvailability();
+            } catch (Exception ex){
+                ex.printStackTrace();
+                Snackbar.error(getWindow(),"Upload failed");
+            }
+        });
     }
 
-    /** Card with pre‑selected file. */
-    private void addImageCard(String title, File file) {
-        ImageCardController ctrl = makeCard(title);
-        if (file != null && file.exists()) {
-            ctrl.setImage(new Image(file.toURI().toString(), true));
-            ctrl.setTitle(file.getName());
+    /* === Replace inside card === */
+    private void openUploadModal(ImageCardController ctrl){
+        UploadImageModalController.open(getWindow(), file -> {
+            try {
+                File dest = copyToUploads(file);
+                updateInDB(ctrl.getId(), file.getName(), dest.getAbsolutePath());
+                ctrl.setImage(new Image(dest.toURI().toString(),true));
+                ctrl.setTitle(file.getName());
+                Snackbar.success(getWindow(),"Replaced");
+            } catch (Exception ex){
+                ex.printStackTrace();
+                Snackbar.error(getWindow(),"Update failed");
+            }
+        });
+    }
+
+    /* === Copy to /uploads/images === */
+    private File copyToUploads(File src) throws IOException {
+        File destDir = new File("src/main/resources/uploads/images");
+        destDir.mkdirs();
+        File dest = new File(destDir, src.getName());
+        try(FileInputStream in = new FileInputStream(src);
+            FileOutputStream out = new FileOutputStream(dest)) {
+            in.transferTo(out);
+        }
+        return dest;
+    }
+
+
+    /* === DB Ops === */
+    private int insertIntoDB(String title,String path) throws SQLException {
+        try(Connection c=DatabaseManager.connect()){
+            PreparedStatement st=c.prepareStatement(
+                    "INSERT INTO images(title,file_name,file_path) VALUES (?,?,?)",
+                    Statement.RETURN_GENERATED_KEYS);
+            st.setString(1,title);
+            st.setString(2,title);
+            st.setString(3,path);
+            st.executeUpdate();
+            return st.getGeneratedKeys().getInt(1);
         }
     }
-
-    /* ═════════════ Top‑right “Add Image” ═════════════ */
-    @FXML
-    private void handleAddImage() {
-        if (cardNodes.size() >= MAX_IMAGES) return;
-        addImageCard("New Image");       // blank card, no modal
-        updateAddAvailability();
+    private void updateInDB(int id,String fileName,String path)throws SQLException{
+        try(Connection c=DatabaseManager.connect()){
+            PreparedStatement st=c.prepareStatement(
+                    "UPDATE images SET file_name=?,file_path=?,title=? WHERE id=?");
+            st.setString(1,fileName);
+            st.setString(2,path);
+            st.setString(3,fileName);
+            st.setInt(4,id);
+            st.executeUpdate();
+        }
+    }
+    private void deleteFromDB(int id,File file){
+        try(Connection c=DatabaseManager.connect()){
+            PreparedStatement st=c.prepareStatement("DELETE FROM images WHERE id=?");
+            st.setInt(1,id);
+            st.executeUpdate();
+        }catch (Exception ignored){}
+        if(file.exists()) file.delete();
     }
 
+    /* === Footer === */
+    @FXML private void resetImages(){ loadFromDB(); Snackbar.info(getWindow(),"Reset"); }
+    @FXML private void saveImages(){ Snackbar.info(getWindow(),"Save","(not implemented)"); }
 
-    /* ═════════════ Upload icon inside a card ═════════════ */
-    /* Upload icon inside a card ----------------------------------------- */
-    private void chooseAndLoadImage(ImageCardController card) {
-        /* Use drag‑&‑drop modal */
-        UploadImageModalController.open(
-                imageFlow.getScene().getWindow(),
-                file -> {
-                    if (file != null) {
-                        card.setImage(new Image(file.toURI().toString(), true));
-                        card.setTitle(file.getName());
-                    }
-                });
-    }
-
-
-    /* ═════════════ Preview icon (stub) ═════════════ */
-    private void showPreview(ImageCardController card) {
-        System.out.println("Preview for " + card);
-        // TODO: implement lightbox preview
-    }
-
-    /* ═════════════ Footer buttons ═════════════ */
-    @FXML private void resetImages() {
-        imageFlow.getChildren().clear();
-        cardNodes.clear();
-        for (int i = 0; i < 6; i++) addImageCard(SAMPLE_TITLE);
-        updateAddAvailability();
-    }
-    @FXML private void saveImages() {
-        System.out.println("Save Images clicked (TODO persist).");
-    }
-
-    /* ═════════════ Utility ═════════════ */
-    private void updateAddAvailability() {
-        boolean maxed = cardNodes.size() >= MAX_IMAGES;
-        addIcon.setOpacity(maxed ? 0.3 : 1.0);
+    /* === Helpers === */
+    private void updateAddAvailability(){
+        boolean maxed = cards.size()>=MAX_IMAGES;
+        addIcon.setVisible(!maxed);
+        addIcon.setManaged(!maxed);
+        addDisabledIcon.setVisible(maxed);
+        addDisabledIcon.setManaged(maxed);
         maxLabel.setVisible(maxed);
+        maxLabel.setManaged(maxed);
+    }
+    private void updateEmptyState(){
+        boolean e = cards.isEmpty();
+        emptyState.setVisible(e);
+        emptyState.setManaged(e);
+    }
+    private Window getWindow(){ return emptyState.getScene().getWindow(); }
+
+    /* lightbox */
+    private void showLightbox(ImageCardController cc){
+        ImagePreviewModalController.open(getWindow(), cc.getPreviewImage().getImage());
     }
 }

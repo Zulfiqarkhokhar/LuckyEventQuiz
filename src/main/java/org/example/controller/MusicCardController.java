@@ -3,6 +3,7 @@ package org.example.controller;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.Slider;
@@ -19,67 +20,66 @@ import java.util.function.Consumer;
 
 public class MusicCardController {
 
-    /* ─────────── static icons ─────────── */
-    private static final Image PLAY_ICON  = icon("icon-plus.png");
-    private static final Image PAUSE_ICON = icon("delete-icon.png");
+    private int id;
+    public void setId(int id) { this.id=id; }
+    public int getId() { return id; }
+
+    private static final Image PLAY_ICON  = icon("Play.png");
+    private static final Image PAUSE_ICON = icon("Pause.png");
     private static Image icon(String n){
         return new Image(Objects.requireNonNull(
                 MusicCardController.class.getResource("/icons/" + n),
                 "Missing /icons/" + n).toExternalForm());
     }
 
-    /* ─────────── FXML ─────────── */
-    @FXML private VBox    playerPane;
-    @FXML private ImageView playIcon;
-    @FXML private Slider  slider;
-    @FXML private Label   titleLbl, fileLbl, currentLbl, totalLbl;
+    @FXML private VBox playerPane;
+    @FXML private ImageView playIcon, uploadIcon;
+    @FXML private Slider slider;
+    @FXML private Label titleLbl, fileLbl, currentLbl, totalLbl;
 
-    /* ─────────── injected callbacks ─────────── */
     private Runnable deleteCb = ()->{};
     private Consumer<MusicCardController> uploadCb = c->{};
 
-    /* ─────────── media state ─────────── */
-    private File        audioFile;
+    private File audioFile;
     private MediaPlayer player;
     private final BooleanProperty dragging = new SimpleBooleanProperty(false);
 
-    /* ═════════════════ PUBLIC API ═════════════════ */
     public void setTitle(String t){ titleLbl.setText(t); }
-
     public void setFileName(String n){
         fileLbl.setText(n);
         fileLbl.setTextOverrun(OverrunStyle.ELLIPSIS);
     }
-
     public void setDeleteCallback(Runnable r){ deleteCb = r; }
     public void setUploadCallback(Consumer<MusicCardController> c){ uploadCb = c; }
 
-    /** called by parent when a file is selected */
     public void setAudioFile(File f){
         stopDispose();
         audioFile = f;
         if(f!=null) loadMedia(f);
     }
 
-    /* ═════════════════ Initialization ═════════════════ */
     @FXML
     private void initialize(){
         slider.setOnMousePressed(e -> dragging.set(true));
         slider.setOnMouseReleased(e -> {
-            if(player!=null)
-                player.seek(Duration.seconds(slider.getValue()));
+            if(player!=null) player.seek(Duration.seconds(slider.getValue()));
             dragging.set(false);
+        });
+
+        // apply styles once the control is in scene graph
+        slider.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                styleSlider();
+            }
         });
     }
 
-    /* ═════════════════ FXML HANDLERS ═════════════════ */
+
     @FXML private void delete(){ stopDispose(); deleteCb.run(); }
     @FXML private void upload(){ uploadCb.accept(this); }
 
-    @FXML
-    private void togglePlay() {
+    @FXML private void togglePlay(){
         if (player == null) {
-            System.out.println("No audio loaded.");
             return;
         }
 
@@ -88,52 +88,91 @@ public class MusicCardController {
         if (isPlaying) {
             player.pause();
             playIcon.setImage(PLAY_ICON);
-            playerPane.setVisible(false);
-            playerPane.setManaged(false);
+            uploadIcon.setVisible(false);
+            uploadIcon.setManaged(false);
+            collapse();
         } else {
+            // reset if at end
+            if (player.getCurrentTime().greaterThanOrEqualTo(player.getTotalDuration())) {
+                player.seek(Duration.ZERO);
+            }
             player.play();
             playIcon.setImage(PAUSE_ICON);
-            playerPane.setVisible(true);
-            playerPane.setManaged(true);
+            uploadIcon.setVisible(true);
+            uploadIcon.setManaged(true);
+            expand();
         }
     }
 
 
-    /* ═════════════════ MediaPlayer setup ═════════════════ */
     private void loadMedia(File f){
         Media media = new Media(f.toURI().toString());
         player = new MediaPlayer(media);
-
         player.setOnReady(() -> {
             double max = media.getDuration().toSeconds();
             slider.setMax(max);
             totalLbl.setText(fmt(max));
-            playIcon.setImage(PLAY_ICON);
-            playerPane.setVisible(false);     // collapsed until play
+            playerPane.setVisible(false);
             playerPane.setManaged(false);
+            playIcon.setImage(PLAY_ICON);
+            forceSliderColors();  // <— add this line
         });
-
         player.currentTimeProperty().addListener((o,ov,nv)->{
             if(!dragging.get()) slider.setValue(nv.toSeconds());
             currentLbl.setText(fmt(nv.toSeconds()));
         });
-
         player.setOnEndOfMedia(() -> {
             playIcon.setImage(PLAY_ICON);
-            playerPane.setVisible(false);
-            playerPane.setManaged(false);
+            collapse();
         });
-
     }
 
     private void stopDispose(){
-        if(player!=null){
-            player.stop(); player.dispose(); player=null;
+        if(player!=null){ player.stop(); player.dispose(); player=null; }
+    }
+    private static String fmt(double s){
+        int m=(int)s/60, sec=(int)s%60;
+        return String.format("%d:%02d",m,sec);
+    }
+    private void styleSlider() {
+        // Unplayed track
+        Node track = slider.lookup(".track");
+        if(track != null){
+            track.setStyle("-fx-background-color: #cccccc; -fx-pref-height: 3px;");
+        }
+
+        // Played-filled portion
+        Node fill = slider.lookup(".filled-track");
+        if(fill != null){
+            fill.setStyle("-fx-background-color: #000000;");
+        }
+
+        // Thumb
+        Node thumb = slider.lookup(".thumb");
+        if(thumb != null){
+            thumb.setStyle("-fx-background-color: #000000; -fx-background-radius: 5px; -fx-pref-width:10px; -fx-pref-height:10px;");
+        }
+    }
+    private void forceSliderColors() {
+        slider.applyCss(); // force skin to generate
+
+        Node track = slider.lookup(".track");
+        if (track != null) {
+            track.setStyle("-fx-background-color: #cccccc; -fx-pref-height: 3px;");
+        }
+
+        Node fill = slider.lookup(".track > *"); // covers filled or colored-track
+        if (fill != null) {
+            fill.setStyle("-fx-background-color: #000000;");
+        }
+
+        Node thumb = slider.lookup(".thumb");
+        if (thumb != null) {
+            thumb.setStyle("-fx-background-color: #000000; -fx-background-radius: 5px; -fx-pref-width:10; -fx-pref-height:10;");
         }
     }
 
-    private static String fmt(double s){
-        int m=(int)s/60, sec=(int)s%60;
-        return String.format("%d:%02d", m, sec);
-    }
+
+    private void collapse(){ playerPane.setVisible(false); playerPane.setManaged(false); }
+    private void expand(){   playerPane.setVisible(true);  playerPane.setManaged(true);  }
 }
