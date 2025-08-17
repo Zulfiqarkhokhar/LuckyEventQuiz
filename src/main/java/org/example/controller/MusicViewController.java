@@ -51,23 +51,34 @@ public class MusicViewController {
         for (Node n : cardNodes) ((Region)n).setPrefWidth(width);
     }
 
-    /* DB LOAD */
+    /* DB LOAD (safe) */
     private void loadFromDB() {
         musicFlow.getChildren().clear();
         cardNodes.clear();
+
         try (Connection c = DatabaseManager.connect()) {
             PreparedStatement st = c.prepareStatement("SELECT * FROM musics");
             ResultSet rs = st.executeQuery();
+
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int id       = rs.getInt("id");
                 String title = rs.getString("title");
                 String fileName = rs.getString("file_name");
-                String path = rs.getString("file_path");
-                addCard(id, title, fileName, new File(path));
+                String path     = rs.getString("file_path");
+
+                File f = new File(path);
+                if (!f.exists()) {
+                    System.err.println("Skipping missing file: " + path);
+                    // Optionally you can delete it from DB here as cleanup
+                    continue;
+                }
+
+                addCard(id, title, fileName, f);
             }
         } catch (SQLException | IOException ex) {
             ex.printStackTrace();
         }
+
         updateAddAvailability();
         updateEmptyState();
     }

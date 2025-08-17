@@ -5,11 +5,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.*?>
 
+<?import javafx.scene.image.ImageView?>
 <BorderPane fx:id="root"
             fx:controller="org.example.controller.AudioQuestionController"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            stylesheets="@questions.css"
+            stylesheets="@../css/questions.css"
             prefWidth="1280" prefHeight="720">
 
     <!-- ────────── TOP: PLAYER CARDS ────────── -->
@@ -72,12 +73,13 @@
                 <VBox alignment="CENTER" spacing="20" maxWidth="600">
 
                     <!-- ► / ❚❚ button + (time-slider-time) strip -->
-                    <HBox alignment="CENTER_LEFT" spacing="14">
+                    <HBox alignment="CENTER_LEFT" spacing="10" >
 
                         <!-- play / pause -->
-                        <Button fx:id="playPauseButton"
-                                text="▶"
-                        styleClass="play-pause"/>
+                        <!-- play / pause icons -->
+                        <ImageView fx:id="playIcon" fitWidth="32" fitHeight="32" styleClass="clickable-icon" />
+                        <ImageView fx:id="pauseIcon" fitWidth="32" fitHeight="32" styleClass="clickable-icon" />
+
 
                         <!-- start-time  | slider |  end-time -->
                         <HBox alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS">

@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // --- Load Question Screen directly ---
-        Parent questionRoot = FXMLLoader.load(getClass().getResource("/fxml/QuestionViewScreen.fxml"));
+        Parent questionRoot = FXMLLoader.load(getClass().getResource("/fxml/AudioQuestion.fxml"));
         Scene questionScene = new Scene(questionRoot, 1280, 720);
         primaryStage.setTitle("Lucky Event - Questions");
         primaryStage.setScene(questionScene);

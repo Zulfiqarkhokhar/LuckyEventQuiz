@@ -9,46 +9,43 @@
             fx:controller="org.example.controller.ImageQuestionController"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            stylesheets="@questions.css"
+            stylesheets="@../css/questions.css"
             prefWidth="1280" prefHeight="720">
 
-    <!-- ────────── TOP: PLAYER CARDS ────────── -->
+    <!-- TOP -->
     <top>
-        <HBox fx:id="topBar" alignment="CENTER">
-            <StackPane styleClass="player-card, red"  HBox.hgrow="ALWAYS">
+        <HBox alignment="CENTER">
+            <StackPane styleClass="player-card, red" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER" spacing="10">
                     <Label text="01" styleClass="player-number"/>
-                    <VBox spacing="2" alignment="CENTER_LEFT">
+                    <VBox alignment="CENTER_LEFT" spacing="2">
                         <Label text="15 Points" styleClass="player-points"/>
                         <Label text="Name Player One" styleClass="player-name"/>
                     </VBox>
                 </HBox>
             </StackPane>
-
             <StackPane styleClass="player-card, lilac" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER" spacing="10">
                     <Label text="02" styleClass="player-number"/>
-                    <VBox spacing="2" alignment="CENTER_LEFT">
+                    <VBox alignment="CENTER_LEFT" spacing="2">
                         <Label text="15 Points" styleClass="player-points"/>
                         <Label text="Name Player Two" styleClass="player-name"/>
                     </VBox>
                 </HBox>
             </StackPane>
-
             <StackPane styleClass="player-card, peach" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER" spacing="10">
                     <Label text="03" styleClass="player-number"/>
-                    <VBox spacing="2" alignment="CENTER_LEFT">
+                    <VBox alignment="CENTER_LEFT" spacing="2">
                         <Label text="15 Points" styleClass="player-points"/>
                         <Label text="Name Player Three" styleClass="player-name"/>
                     </VBox>
                 </HBox>
             </StackPane>
-
-            <StackPane styleClass="player-card, pink"  HBox.hgrow="ALWAYS">
+            <StackPane styleClass="player-card, pink" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER" spacing="10">
                     <Label text="04" styleClass="player-number"/>
-                    <VBox spacing="2" alignment="CENTER_LEFT">
+                    <VBox alignment="CENTER_LEFT" spacing="2">
                         <Label text="15 Points" styleClass="player-points"/>
                         <Label text="Name Player Four" styleClass="player-name"/>
                     </VBox>
@@ -57,15 +54,13 @@
         </HBox>
     </top>
 
-    <!-- ────────── CENTER: QUESTION + IMAGE ────────── -->
+    <!-- CENTER -->
     <center>
         <VBox alignment="CENTER_LEFT" spacing="30" styleClass="image-question-block-padding">
-
             <Label fx:id="questionLabel"
                    text="CAN YOU IDENTIFY THIS IMAGE?"
                    wrapText="true"
                    styleClass="question"/>
-
             <StackPane alignment="CENTER">
                 <ImageView fx:id="questionImage"
                            preserveRatio="true"
@@ -75,9 +70,9 @@
         </VBox>
     </center>
 
-    <!-- ────────── BOTTOM-RIGHT: LOGO ────────── -->
+    <!-- BOTTOM -->
     <bottom>
-        <HBox fx:id="logoBar" alignment="BOTTOM_RIGHT" styleClass="logo-padding">
+        <HBox alignment="BOTTOM_RIGHT" styleClass="logo-padding">
             <Label text="Lucky" styleClass="logo"/>
             <Label text="event" styleClass="logo-accent"/>
         </HBox>

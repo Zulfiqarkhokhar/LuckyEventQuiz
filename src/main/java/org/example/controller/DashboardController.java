@@ -101,7 +101,7 @@ public class DashboardController {
                 Stage stage = (Stage) startGameBtn.getScene().getWindow();
                 Scene scene = new Scene(root);
 
-                scene.getStylesheets().add(getClass().getResource("/fxml/questions.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("/css/questions.css").toExternalForm());
                 stage.setScene(scene);
                 stage.setFullScreen(true);
 
