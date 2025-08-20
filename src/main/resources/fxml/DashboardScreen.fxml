@@ -34,7 +34,7 @@
                 <!-- Current Game Section -->
                 <VBox spacing="4">
                     <Label fx:id="currentGameLabel" text="CURRENT GAME" styleClass="section-heading"/>
-                    <Label text="CURRENT GAME" styleClass="section-value"/>
+                    <Label fx:id="currentGameValueLabel" text="Question Game" styleClass="section-value"/>
                 </VBox>
 
                 <!-- Players Section -->

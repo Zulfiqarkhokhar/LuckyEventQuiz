@@ -129,20 +129,45 @@
     </BorderPane>
 
     <!-- Popup overlay -->
-    <AnchorPane fx:id="editPlayerPopup" styleClass="popup-pane" visible="false" opacity="0">
-        <VBox alignment="CENTER" spacing="20" styleClass="edit-popup-box">
+    <!-- Popup overlay -->
+    <AnchorPane fx:id="editPlayerPopup"
+                styleClass="popup-pane"
+                visible="false"
+                opacity="0"
+                StackPane.alignment="CENTER"
+                prefWidth="600" prefHeight="200"
+                maxWidth="600" maxHeight="200">
+
+        <!-- Center the content using AnchorPane constraints -->
+        <VBox alignment="CENTER" spacing="20" styleClass="edit-popup-box"
+              AnchorPane.topAnchor="0"
+              AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0">
             <Label text="Edit Player" styleClass="popup-title"/>
             <TextField fx:id="buzzerIdField" promptText="Enter Buzzer ID"/>
             <ColorPicker fx:id="buzzerColorPicker"/>
             <HBox spacing="10">
-                <Button text="Save" />
+                <Button text="Save"/>
                 <Button text="Cancel"/>
             </HBox>
         </VBox>
     </AnchorPane>
+    <!-- Popup overlay -->
+    <AnchorPane fx:id="editSoundPopup"
+                styleClass="popup-pane"
+                visible="false"
+                opacity="0"
+                StackPane.alignment="CENTER"
+                prefWidth="500" prefHeight="400"
+                maxWidth="500" maxHeight="400">
 
-    <AnchorPane fx:id="editSoundPopup" styleClass="popup-pane" visible="false" opacity="0">
-        <VBox alignment="CENTER" spacing="20" styleClass="edit-popup-box">
+        <!-- Center the content using AnchorPane constraints -->
+        <VBox alignment="CENTER" spacing="20" styleClass="edit-popup-box"
+              AnchorPane.topAnchor="0"
+              AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0">
             <Label text="Edit Sound" styleClass="popup-title"/>
             <TextField fx:id="soundNameField" promptText="Enter Sound Name"/>
             <HBox spacing="10" alignment="CENTER">

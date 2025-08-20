@@ -59,6 +59,26 @@
                         <Button fx:id="startMusicBtn" text="Start Music Game" styleClass="game-button"/>
                     </VBox>
                 </VBox>
+                <VBox styleClass="game-card" alignment="CENTER">
+                    <ImageView fx:id="allInOneImage" fitWidth="150" fitHeight="100"/>
+                    <VBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 20;">
+                        <Label text="All-in-One" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                        <Label text="A shuffle of questions, images, and songs combined into one game mode."
+                               wrapText="true" style="-fx-font-weight: bold;"/>
+                        <Button fx:id="selectAllInOneBtn" text="Select All-in-One Game" styleClass="game-button"/>
+                    </VBox>
+                </VBox>
+
+                <!-- Spontaneous Card -->
+                <VBox styleClass="game-card" alignment="CENTER">
+                    <ImageView fx:id="spontaneousImage" fitWidth="150" fitHeight="100"/>
+                    <VBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 20;">
+                        <Label text="Spontaneous" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                        <Label text="Unpredictable spontaneous game mode where surprises await."
+                               wrapText="true" style="-fx-font-weight: bold;"/>
+                        <Button fx:id="selectSpontaneousBtn" text="Select Spontaneous Game" styleClass="game-button"/>
+                    </VBox>
+                </VBox>
 
             </HBox>
         </VBox>

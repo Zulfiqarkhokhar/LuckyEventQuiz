@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.example.util.GameState;
 
 import java.io.IOException;
 
@@ -14,53 +15,36 @@ public class GameModeController {
     @FXML private Button startQuestionBtn;
     @FXML private Button startImagesBtn;
     @FXML private Button startMusicBtn;
+    @FXML private Button selectAllInOneBtn;
+    @FXML private Button selectSpontaneousBtn;
 
     @FXML
     public void initialize() {
-        startQuestionBtn.setOnAction(e -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/QuestionGameAdminView.fxml"));
-                Stage stage = (Stage) startQuestionBtn.getScene().getWindow();
-                Scene scene = new Scene(root);
+        startQuestionBtn.setText("Select Question Game");
+        startImagesBtn.setText("Select Images Game");
+        startMusicBtn.setText("Select Music Game");
+        selectAllInOneBtn.setText("Select All-in-One Game");
+        selectSpontaneousBtn.setText("Select Spontaneous Game");
 
-                scene.getStylesheets().add(getClass().getResource("/css/question-game.css").toExternalForm());
-                stage.setScene(scene);
-                stage.setFullScreen(true);
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-
-        startImagesBtn.setOnAction(e -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/ImageGameAdminView.fxml"));
-                Stage stage = (Stage) startImagesBtn.getScene().getWindow();
-                Scene scene = new Scene(root);
-
-                scene.getStylesheets().add(getClass().getResource("/css/image-game.css").toExternalForm());
-                stage.setScene(scene);
-                stage.setFullScreen(true);
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-
-        startMusicBtn.setOnAction(e -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/MusicGameAdminView.fxml"));
-                Stage stage = (Stage) startMusicBtn.getScene().getWindow();
-                Scene scene = new Scene(root);
-
-                scene.getStylesheets().add(getClass().getResource("/css/music-game.css").toExternalForm());
-                stage.setScene(scene);
-                stage.setFullScreen(true);
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+        startQuestionBtn.setOnAction(e -> selectGame("Question Game"));
+        startImagesBtn.setOnAction(e -> selectGame("Images Game"));
+        startMusicBtn.setOnAction(e -> selectGame("Music Game"));
+        selectAllInOneBtn.setOnAction(e -> selectGame("All-in-One Game"));
+        selectSpontaneousBtn.setOnAction(e -> selectGame("Spontaneous Game"));
     }
 
+    private void selectGame(String gameName) {
+        try {
+            GameState.setCurrentGame(gameName);
+
+            Parent dashboardRoot = FXMLLoader.load(getClass().getResource("/fxml/DashboardScreen.fxml"));
+            Stage stage = (Stage) startQuestionBtn.getScene().getWindow();
+            Scene scene = new Scene(dashboardRoot, 1280, 720);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

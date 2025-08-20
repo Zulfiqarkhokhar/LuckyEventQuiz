@@ -36,21 +36,37 @@ public class PlayerManagementController {
             Parent popupContent = loader.load();
 
             EditPlayerPopupController controller = loader.getController();
-            controller.setOnClose(this::hideSoundPopup);  // ✅ set the callback
+            controller.setOnClose(this::hidePlayerPopup);
 
-            editSoundPopup.getChildren().setAll(popupContent);
-            editSoundPopup.setVisible(true);
+            // Clear the container and add the new content
+            editPlayerPopup.getChildren().setAll(popupContent);
 
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(300), editSoundPopup);
+            // Center the content within the container
+            AnchorPane.setTopAnchor(popupContent, 0.0);
+            AnchorPane.setBottomAnchor(popupContent, 0.0);
+            AnchorPane.setLeftAnchor(popupContent, 0.0);
+            AnchorPane.setRightAnchor(popupContent, 0.0);
+
+            editPlayerPopup.setVisible(true);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(300), editPlayerPopup);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
             fadeIn.play();
-
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private void hidePlayerPopup() {
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), editPlayerPopup);
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+        fadeOut.setOnFinished(e -> editPlayerPopup.setVisible(false));
+        fadeOut.play();
+    }
+
 
     private void hideSoundPopup() {
         FadeTransition fadeOut = new FadeTransition(Duration.millis(200), editSoundPopup);
@@ -67,7 +83,17 @@ public class PlayerManagementController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SoundEditPopup.fxml"));
             Parent popupContent = loader.load();
 
+            SoundEditPopupController controller = loader.getController();
+            controller.setOnClose(this::hideSoundPopup); // ✅ Set the callback
+
             editSoundPopup.getChildren().setAll(popupContent);
+
+            // Center the content within the container
+            AnchorPane.setTopAnchor(popupContent, 0.0);
+            AnchorPane.setBottomAnchor(popupContent, 0.0);
+            AnchorPane.setLeftAnchor(popupContent, 0.0);
+            AnchorPane.setRightAnchor(popupContent, 0.0);
+
             editSoundPopup.setVisible(true);
 
             FadeTransition fadeIn = new FadeTransition(Duration.millis(300), editSoundPopup);
