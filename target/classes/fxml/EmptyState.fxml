@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      alignment="CENTER"
+      spacing="12"
+      fx:id="emptyBox"
+      visible="false"
+      managed="false"
+      prefWidth="560"
+      prefHeight="400"
+      stylesheets="@/css/empty-state.css"
+      styleClass="empty-state">
+
+    <ImageView fx:id="icon"
+               fitWidth="130" fitHeight="100"
+               pickOnBounds="true">
+        <image>
+            <Image url="@../icons/Not_Found.png"/>
+        </image>
+    </ImageView>
+
+    <Label fx:id="headline"
+           text="No Data Available"
+           styleClass="empty-head"/>
+</VBox>

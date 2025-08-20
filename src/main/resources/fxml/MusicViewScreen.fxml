@@ -11,24 +11,43 @@
             prefWidth="1392" prefHeight="768"
             stylesheets="@/css/music.css, @/css/images.css, @/css/upload.css">
 
-    <stylesheets>
-        <URL value="@/css/upload.css" />
-    </stylesheets>
-
     <Label text="MUSIC" styleClass="title"
            AnchorPane.leftAnchor="60" AnchorPane.topAnchor="35"/>
 
-    <HBox spacing="6" alignment="CENTER_RIGHT"
-          AnchorPane.rightAnchor="60" AnchorPane.topAnchor="25">
-        <VBox alignment="CENTER_RIGHT" spacing="2">
-            <Label text="Add Music" styleClass="add-label"/>
-            <Label fx:id="maxLabel" text="Max. Audios reached"
+    <HBox spacing="6" AnchorPane.rightAnchor="60" AnchorPane.topAnchor="50"
+          alignment="CENTER_RIGHT">
+        <VBox alignment="BOTTOM_RIGHT" spacing="2">
+            <Label text="Add Music" styleClass="add-label, clickable-icon" onMouseClicked="#handleAddMusic"/>
+            <Label fx:id="maxLabel"
+                   text="Max. Music Limit reached"
                    styleClass="max-label" visible="false"/>
         </VBox>
+
+        <!-- crossed-out plus as disabled icon -->
+        <ImageView fx:id="addDisabledIcon"
+                   fitWidth="25" fitHeight="25"
+                   pickOnBounds="true"
+                   style="-fx-cursor: not-allowed;"
+                   styleClass="clickable-icon"
+                   onMouseClicked="#handleAddMusic"
+                   visible="false"
+        >
+            <image>
+                <Image url="@../icons/Plus_Max.png"/>
+            </image>
+        </ImageView>
+
+        <!--  plus icon -->
         <ImageView fx:id="addIcon"
-                   fitWidth="32" fitHeight="32" pickOnBounds="true"
-                   onMouseClicked="#handleAddMusic">
-            <image><Image url="@../icons/icon-plus.png"/></image>
+                   fitWidth="15" fitHeight="15"
+                   pickOnBounds="true"
+                   onMouseClicked="#handleAddMusic"
+                   visible="false"
+                   styleClass="clickable-icon"
+        >
+            <image>
+                <Image url="@../icons/Plus.png"/>
+            </image>
         </ImageView>
     </HBox>
 
@@ -37,17 +56,21 @@
                 AnchorPane.topAnchor="95" AnchorPane.bottomAnchor="130"
                 hbarPolicy="NEVER" fitToWidth="true">
         <content>
-            <FlowPane fx:id="musicFlow" hgap="50" vgap="40"
-                      alignment="TOP_CENTER"/>
+            <StackPane>
+                <FlowPane fx:id="musicFlow" hgap="30" vgap="20"
+                          alignment="TOP_LEFT"/>
+                <fx:include fx:id="emptyState" source="/fxml/EmptyState.fxml"/>
+            </StackPane>
         </content>
     </ScrollPane>
 
+
     <HBox spacing="24" alignment="BASELINE_RIGHT"
           AnchorPane.rightAnchor="60" AnchorPane.bottomAnchor="40">
-        <Button text="CSV Upload"      styleClass="secondary-btn"/>
-        <Button text="Reset Musics"    styleClass="secondary-btn"
+        <Button text="CSV Upload"      styleClass="secondary-btn, clickable-icon"/>
+        <Button text="Reset Musics"    styleClass="secondary-btn, clickable-icon"
                 onAction="#resetMusic"/>
-        <Button text="Save Musics"     styleClass="primary-btn"
+        <Button text="Save Musics"     styleClass="primary-btn, clickable-icon"
                 onAction="#saveMusic"/>
     </HBox>
 </AnchorPane>

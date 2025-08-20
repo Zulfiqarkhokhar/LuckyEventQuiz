@@ -15,3 +15,6 @@
     -fx-font-weight: 700;
 }
 Text { -fx-font-size: 16px; -fx-font-weight: 700; -fx-fill: #000000; }
+.clickable-icon {
+    -fx-cursor: hand;
+}

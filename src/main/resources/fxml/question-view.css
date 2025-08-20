@@ -61,8 +61,49 @@
 
 /* scrollbar track / thumb colouring */
 .scroll-pane .viewport        { -fx-background-color: transparent; }
-.scroll-bar:vertical .thumb   { -fx-background-color: #e07d1e; }
-.scroll-bar:vertical .track   { -fx-background-color: #cfcfcf; }
+/* ───────── CUSTOM VERTICAL SCROLLBAR ───────── */
+
+.scroll-bar:vertical {
+    -fx-pref-width: 11px;
+}
+
+/* Remove the up/down arrow buttons */
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-shape: "";
+}
+
+/* Track background */
+.scroll-bar:vertical .track {
+    -fx-background-color: #D9D9D9;
+    -fx-background-radius: 10;
+    -fx-padding: 6;
+}
+
+/* The actual scroll thumb */
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #E07D1E;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10 10 10 10;
+    -fx-padding: 6;
+}
+/* Remove tiny arrow icons/buttons from vertical scrollbar */
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow,
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button,
+.scroll-bar:vertical .increment-arrow-button,
+.scroll-bar:vertical .decrement-arrow-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-shape: "";
+    -fx-opacity: 0;
+}
+
+
+
 
 /* completely strip borders / padding around the ScrollPane */
 .scroll-pane {
@@ -71,3 +112,12 @@
     -fx-border-color: transparent;
     -fx-background-insets: 0;
 }
+
+.clickable-icon {
+    -fx-cursor: hand;
+}
+
+
+
+
+

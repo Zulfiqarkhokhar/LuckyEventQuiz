@@ -1,0 +1,13 @@
+.empty-state{
+    -fx-start-margin: 50;
+}
+.empty-head {
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #333;
+}
+
+.empty-sub {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666;
+}

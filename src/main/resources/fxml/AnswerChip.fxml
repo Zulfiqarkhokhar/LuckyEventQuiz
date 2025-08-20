@@ -16,13 +16,16 @@
     <TextField fx:id="textField"
                promptText="Answer text…"
                styleClass="answer-field"
-               HBox.hgrow="ALWAYS"/>
+               HBox.hgrow="ALWAYS"
+
+    />
 
     <!-- TRASH ICON -->
     <ImageView fx:id="delBtn"
                fitWidth="14" fitHeight="14"
                pickOnBounds="true"
+               styleClass="clickable-icon"
                onMouseClicked="#handleDelete">
-        <image><Image url="@../icons/icon-plus.png"/></image>
+        <image><Image url="@../icons/Delete.png"/></image>
     </ImageView>
 </HBox>

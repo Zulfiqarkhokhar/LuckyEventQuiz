@@ -8,7 +8,7 @@
 <BorderPane fx:controller="org.example.controller.QuestionController"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            stylesheets="@questions.css"
+            stylesheets="@/css/questions.css"
             prefWidth="1280" prefHeight="720">
 
     <!-- ─────────── TOP: PLAYER CARDS ─────────── -->
@@ -84,8 +84,12 @@
 
     <!-- ─────────── CENTER: QUESTION & ANSWERS ─────────── -->
     <center>
-        <VBox alignment="CENTER" spacing="48" styleClass="question-block-padding">
-            <!-- Question block -->
+        <VBox fx:id="questionBox"
+              alignment="TOP_CENTER"
+              spacing="48"
+              styleClass="question-block-padding, content-area">
+
+        <!-- Question block -->
             <VBox spacing="8">
                 <Label text="CURRENT QUESTION" styleClass="subtitle"/>
                 <Label fx:id="questionLabel"
@@ -94,12 +98,8 @@
             </VBox>
 
             <!-- Answers -->
-            <HBox spacing="32">
-                <Button text="Answer A" styleClass="answer" HBox.hgrow="ALWAYS" />
-                <Button text="Answer B" styleClass="answer" HBox.hgrow="ALWAYS" />
-                <Button text="Answer C" styleClass="answer" HBox.hgrow="ALWAYS" />
-                <Button text="Answer D" styleClass="answer" HBox.hgrow="ALWAYS" />
-            </HBox>
+            <FlowPane fx:id="answersFlow" hgap="20" vgap="15" orientation="HORIZONTAL"/>
+
         </VBox>
     </center>
 

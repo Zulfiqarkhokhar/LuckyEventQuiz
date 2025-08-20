@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -8,6 +7,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.controller.MusicCardController"
       styleClass="music-card"
+      stylesheets="@/css/music.css"
       spacing="12" prefWidth="560">
 
     <HBox alignment="CENTER_LEFT">
@@ -18,28 +18,35 @@
 
         <Region HBox.hgrow="ALWAYS"/>
 
-        <!-- delete -->
-        <ImageView fitWidth="16" fitHeight="16" onMouseClicked="#delete"
-                   pickOnBounds="true">
-            <image><Image url="@../icons/delete-icon.png"/></image>
-        </ImageView>
+        <!-- ICONS -->
+        <HBox fx:id="iconBar" alignment="TOP_RIGHT" spacing="14">
+            <!-- delete -->
+            <ImageView fx:id="deleteIcon" fitWidth="16" fitHeight="16"
+                       onMouseClicked="#delete"
+                       pickOnBounds="true">
+                <image><Image url="@../icons/Delete.png"/></image>
+            </ImageView>
 
-        <!-- upload / replace -->
-        <ImageView fitWidth="18" fitHeight="18" onMouseClicked="#upload"
-                   pickOnBounds="true">
-            <image><Image url="@../icons/icon-plus.png"/></image>
-        </ImageView>
+            <!-- upload (only visible when expanded/playing)-->
+            <ImageView fx:id="uploadIcon" fitWidth="18" fitHeight="18"
+                       onMouseClicked="#upload"
+                       pickOnBounds="true"
+                       visible="false" managed="false">
+                <image><Image url="@../icons/Upload_Music.png"/></image>
+            </ImageView>
 
-        <!-- play / pause -->
-        <ImageView fx:id="playIcon" fitWidth="18" fitHeight="18"
-                   onMouseClicked="#togglePlay"
-                   pickOnBounds="true">
-            <image><Image url="@../icons/delete-icon.png"/></image>
-        </ImageView>
+            <!-- play / pause -->
+            <ImageView fx:id="playIcon" fitWidth="18" fitHeight="18"
+                       onMouseClicked="#togglePlay"
+                       pickOnBounds="true">
+                <image><Image url="@../icons/Play.png"/></image>
+            </ImageView>
+        </HBox>
     </HBox>
 
     <VBox fx:id="playerPane" spacing="4" visible="false" managed="false">
-        <Slider fx:id="slider" maxWidth="Infinity"/>
+        <Slider fx:id="slider" maxWidth="Infinity" styleClass="music-slider"/>
+
         <HBox alignment="CENTER_LEFT" spacing="6">
             <Label fx:id="currentLbl" text="0:00" styleClass="time-label"/>
             <Region HBox.hgrow="ALWAYS"/>

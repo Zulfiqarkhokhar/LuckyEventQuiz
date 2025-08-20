@@ -24,6 +24,10 @@ public class ImageCardController {
     @FXML private ImageView previewImage;
     @FXML private ImageView expandIcon;
 
+    private int id;
+    public void setId(int id){ this.id=id; }
+    public int getId(){ return id; }
+
     /* callbacks injected by parent */
     private Runnable onDelete = () -> {};
     private Consumer<ImageCardController> onExpand = c -> {};
@@ -53,6 +57,10 @@ public class ImageCardController {
     @FXML
     private void initialize() {
         /* make expand icon sit bottom-right inside preview */
-        StackPane.setAlignment(expandIcon, Pos.BOTTOM_RIGHT);
+        StackPane.setAlignment(expandIcon, Pos.TOP_RIGHT);
+    }
+
+    public ImageView getPreviewImage() {
+        return previewImage;
     }
 }

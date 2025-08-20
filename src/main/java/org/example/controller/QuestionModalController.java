@@ -15,25 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-/**
- * Controller for the Add / Edit Question modal.
- * – Centres itself over a dim overlay.
- * – Two answer “pills” per row via FlowPane.
- */
 public class QuestionModalController {
 
-    /* ──────────────── FXML references ─────────────── */
-    @FXML private StackPane overlay;         // full-screen dim layer
-    @FXML private TextField questionField;   // editable question text
-    @FXML private FlowPane  answersPane;     // holds AnswerChip nodes
+    @FXML private StackPane overlay;
+    @FXML private TextField questionField;
+    @FXML private FlowPane  answersPane;
 
-    /* ─────────────── callback wired by parent ─────────────── */
     private BiConsumer<String, List<String>> onSave = (q, a) -> {};
     public void setOnSave(BiConsumer<String, List<String>> cb) { onSave = cb; }
 
-    /* ════════════════════════════════════════════════════════ */
-    /*        STATIC FACTORY: open modal & return ctrl         */
-    /* ════════════════════════════════════════════════════════ */
+    /* ==== Static creator (opens modal) ==== */
     public static QuestionModalController open(Window owner,
                                                String question,
                                                List<String> answers,
@@ -45,7 +36,6 @@ public class QuestionModalController {
             QuestionModalController ctrl = fx.getController();
             ctrl.init(question, answers, onSave);
 
-            /* ensure Scene root is a StackPane so we can overlay */
             Parent sceneRoot = owner.getScene().getRoot();
             StackPane stackRoot;
             if (sceneRoot instanceof StackPane) {
@@ -56,29 +46,32 @@ public class QuestionModalController {
             }
             stackRoot.getChildren().add(modalRoot);
             return ctrl;
-
         } catch (IOException ex) {
             throw new RuntimeException("Cannot open Question modal", ex);
         }
     }
 
-    /* ───────────────────── initialisation ─────────────────── */
+    /* ==== Initialiser ==== */
     private void init(String question,
                       List<String> answers,
                       BiConsumer<String, List<String>> onSave) {
         this.onSave = onSave;
         questionField.setText(question == null ? "" : question);
 
-        if (answers == null || answers.isEmpty()) {
-            answers = List.of("Answer Number One",
-                    "Answer Number Two",
-                    "Answer Number Three",
-                    "Answer Number Four");
+        if (question == null && (answers == null || answers.isEmpty())) {
+            // ADD MODE → show 4 empty chips
+            for (int i = 0; i < 4; i++) {
+                addChip(null);
+            }
+        } else {
+            // EDIT MODE → show existing answers
+            if (answers != null) {
+                answers.forEach(this::addChip);
+            }
         }
-        answers.forEach(this::addChip);
     }
 
-    /* ─────────── create & add a single AnswerChip ─────────── */
+    /* ==== Add one chip to FlowPane ==== */
     private void addChip(String initialText) {
         try {
             FXMLLoader fx = new FXMLLoader(
@@ -86,44 +79,58 @@ public class QuestionModalController {
             Node chipNode = fx.load();
             AnswerChipController chip = fx.getController();
 
-            chip.setText(initialText == null ? "" : initialText);
+            if (initialText == null) {
+                chip.setText("");
+                chip.getTextField().setPromptText("Answer text…");
+            } else {
+                chip.setText(initialText);
+            }
+
+            // Important → so we can retrieve controller later in handleSave()
+            chipNode.setUserData(chip);
+
             chip.setOnDelete(() -> answersPane.getChildren().remove(chipNode));
 
-            /* two chips per row:
-               (container width – hgap) / 2  */
+            // half-width behaviour
             Region chipRegion = (Region) chipNode;
             chipRegion.prefWidthProperty().bind(
                     answersPane.widthProperty().subtract(28).divide(2));
 
             answersPane.getChildren().add(chipNode);
 
-            if (initialText == null) chip.requestFocus();
-
+            if (initialText == null) {
+                chip.requestFocus();
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    /* ──────────────── FXML event handlers ─────────────── */
-    @FXML private void handleAddAnswer() { addChip(null); }   // “Add Answer +”
-    @FXML private void handleClose()    { close(); }          // ✕ icon
+    /* ==== Events ==== */
+    @FXML private void handleAddAnswer() { addChip(null); }
+    @FXML private void handleClose() { close(); }
 
     @FXML
     private void handleSave() {
         String question = questionField.getText().trim();
 
         List<String> ans = new ArrayList<>();
-        answersPane.getChildren().forEach(n -> {
+        for (Node n : answersPane.getChildren()) {
             AnswerChipController c = (AnswerChipController) n.getUserData();
-            if (c != null) ans.add(c.getText().trim());
-        });
+            if (c != null && !c.getText().trim().isEmpty()) {
+                ans.add(c.getText().trim());
+            }
+        }
 
         onSave.accept(question, ans);
         close();
     }
 
-    /* ─────────── internal helper to remove modal ─────────── */
     private void close() {
-        ((StackPane) overlay.getParent()).getChildren().remove(overlay);
+        // Remove this modal overlay from whatever StackPane it was added to
+        Parent parent = overlay.getParent();
+        if (parent instanceof StackPane stack) {
+            stack.getChildren().remove(overlay);
+        }
     }
 }

@@ -14,7 +14,7 @@
 
     <!-- white card -->
     <VBox fx:id="card" alignment="CENTER" spacing="18" onMouseClicked="#handleChooseFile"
-          styleClass="upload-card" prefWidth="500" prefHeight="250">
+          styleClass="upload-card, clickable-icon" prefWidth="500" prefHeight="250">
 
         <!-- icon -->
         <ImageView fitWidth="28" fitHeight="28">

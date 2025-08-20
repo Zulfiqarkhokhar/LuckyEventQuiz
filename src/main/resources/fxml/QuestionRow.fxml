@@ -21,16 +21,18 @@
     <ImageView fx:id="deleteIcon"
                fitWidth="20" fitHeight="20"
                pickOnBounds="true"
+               styleClass="clickable-icon"
                onMouseClicked="#handleDelete">
-        <image><Image url="@../icons/icon-plus.png"/></image>
+        <image><Image url="@../icons/Delete.png"/></image>
     </ImageView>
 
     <!-- EDIT ICON -->
     <ImageView fx:id="editIcon"
                fitWidth="20" fitHeight="20"
                pickOnBounds="true"
+               styleClass="clickable-icon"
                onMouseClicked="#handleEdit">
-        <image><Image url="@../icons/icon-plus.png"/></image>
+        <image><Image url="@../icons/Edit.png"/></image>
     </ImageView>
 
 </HBox>

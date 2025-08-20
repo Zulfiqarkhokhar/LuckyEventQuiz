@@ -15,34 +15,40 @@
     <HBox alignment="CENTER_LEFT" spacing="8">
         <Label fx:id="titleLbl" text="Image 01" styleClass="card-title" />
         <Region HBox.hgrow="ALWAYS"/>
-        <!-- delete -->
-        <ImageView fx:id="deleteIcon"
-                   fitWidth="16" fitHeight="16" pickOnBounds="true"
-                   onMouseClicked="#handleDelete">
-            <image><Image url="@../icons/icon-plus.png"/></image>
-        </ImageView>
-        <!-- upload/replace -->
-        <ImageView fx:id="uploadIcon"
-                   fitWidth="18" fitHeight="18" pickOnBounds="true"
-                   onMouseClicked="#handleUpload">
-            <image><Image url="@../icons/icon-plus.png"/></image>
-        </ImageView>
+        <HBox spacing="10">
+            <!-- delete -->
+            <ImageView fx:id="deleteIcon"
+                       styleClass="clickable-icon"
+                       fitWidth="18" fitHeight="18" pickOnBounds="true"
+                       onMouseClicked="#handleDelete">
+                <image><Image url="@../icons/Delete.png"/></image>
+            </ImageView>
+            <!-- upload/replace -->
+            <ImageView fx:id="uploadIcon"
+                       styleClass="clickable-icon"
+                       fitWidth="30" fitHeight="18" pickOnBounds="true"
+                       onMouseClicked="#handleUpload">
+                <image><Image url="@../icons/Upload_Image.png"/></image>
+            </ImageView>
+        </HBox>
     </HBox>
 
     <StackPane fx:id="previewWrapper" styleClass="preview-wrapper"
                prefHeight="180" minHeight="120" maxHeight="Infinity">
+
         <ImageView fx:id="previewImage"
                    preserveRatio="true"
                    fitWidth="300" fitHeight="160">
             <image><Image url="@../icons/icon-plus.png"/></image>
         </ImageView>
 
-        <!-- expand icon (bottom-right overlay) -->
+        <!-- expand icon now positioned top-right -->
         <ImageView fx:id="expandIcon"
-                   styleClass="expand-icon"
-                   fitWidth="16" fitHeight="16" pickOnBounds="true"
+                   styleClass="expand-icon, clickable-icon"
+                   StackPane.alignment="TOP_RIGHT"
+                   fitWidth="18" fitHeight="18" pickOnBounds="true"
                    onMouseClicked="#handleExpand">
-            <image><Image url="@../icons/icon-plus.png"/></image>
+            <image><Image url="@../icons/Expand.png"/></image>
         </ImageView>
     </StackPane>
 </VBox>

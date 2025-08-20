@@ -1,64 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-
-<!-- ───────────── overlay (dim background) ───────────── -->
 <StackPane fx:id="overlay"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="org.example.controller.QuestionModalController"
-           alignment="CENTER"
            stylesheets="@/css/modal.css"
+           alignment="CENTER"
            styleClass="overlay">
 
-    <!-- ───────────── white rounded card ───────────── -->
-    <AnchorPane fx:id="card" styleClass="modal-card"
-                maxWidth="840"  minWidth="640"
-                maxHeight="600">
+    <!-- Outer white rounded “card” container -->
+    <AnchorPane fx:id="card" styleClass="modal-card" maxWidth="900" minWidth="700" maxHeight="600">
 
-        <!-- ①  QUESTION FIELD + ✕ icon -->
-        <HBox spacing="8" alignment="CENTER_LEFT"
-              AnchorPane.leftAnchor="25" AnchorPane.rightAnchor="25"
-              AnchorPane.topAnchor="25">
-            <TextField fx:id="questionField"
-                       styleClass="question-field"
-                       HBox.hgrow="ALWAYS"/>
+        <!-- Content column -->
+        <VBox spacing="24"
+              AnchorPane.topAnchor="35" AnchorPane.leftAnchor="45"
+              AnchorPane.rightAnchor="45" AnchorPane.bottomAnchor="35">
 
-            <!-- close icon -->
-            <ImageView fx:id="closeBtn"
-                       fitWidth="18" fitHeight="18" pickOnBounds="true"
-                       onMouseClicked="#handleClose">
-                <image><Image url="@../icons/icon-plus.png"/></image>
-            </ImageView>
-        </HBox>
+            <!-- Top editable question + close -->
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <TextField fx:id="questionField"
+                           styleClass="question-field"
+                           HBox.hgrow="ALWAYS"
+                           promptText="Enter your question here..."
+                />
+                <ImageView fx:id="closeBtn"
+                           fitWidth="24" fitHeight="24"
+                           styleClass="clickable-icon"
+                           pickOnBounds="true"
+                           onMouseClicked="#handleClose">
+                    <image><Image url="@../icons/Cross.png"/></image>
+                </ImageView>
+            </HBox>
 
-        <Separator AnchorPane.leftAnchor="25" AnchorPane.rightAnchor="25"
-                   AnchorPane.topAnchor="80"/>
 
-        <!-- ②  “Add Answer +” row (clickable) -->
-        <HBox spacing="6" alignment="CENTER_LEFT"
-              AnchorPane.leftAnchor="40" AnchorPane.topAnchor="110"
-              onMouseClicked="#handleAddAnswer">
-            <Label text="Add Answer" styleClass="add-label"/>
-            <ImageView fitWidth="16" fitHeight="16" pickOnBounds="true">
-                <image><Image url="@../icons/icon-plus.png"/></image>
-            </ImageView>
-        </HBox>
+            <!-- Add-answer row -->
+            <HBox spacing="6" alignment="CENTER_LEFT"
+                  onMouseClicked="#handleAddAnswer" styleClass="clickable-icon">
+                <Label text="Add Answer" styleClass="add-label"/>
+                <ImageView fitWidth="18" fitHeight="18">
+                    <image><Image url="@../icons/Plus.png"/></image>
+                </ImageView>
+            </HBox>
 
-        <!-- ③  ANSWER CHIPS (two per row) -->
-        <FlowPane fx:id="answersPane"
-                  hgap="28" vgap="22"
-                  AnchorPane.leftAnchor="25" AnchorPane.rightAnchor="25"
-                  AnchorPane.topAnchor="150"/>
+            <!-- Scroll area for chips -->
+            <ScrollPane fx:id="chipScroll"
+                        hbarPolicy="NEVER"
+                        vbarPolicy="AS_NEEDED"
+                        fitToWidth="true"
+                        prefHeight="360"
+                        styleClass="chip-scroll"
+            >
+                <content>
+                    <FlowPane fx:id="answersPane"
+                              hgap="28"
+                              vgap="20"
+                              prefWrapLength="750"/>
+                </content>
+            </ScrollPane>
 
-        <!-- ④  SAVE button (small black pill) -->
-        <Button fx:id="saveBtn"
-                text="Save Changes"
-                styleClass="primary-btn, small"
-                AnchorPane.bottomAnchor="35" AnchorPane.rightAnchor="25"
-                onAction="#handleSave"/>
+            <!-- Bottom-right save button -->
+            <HBox alignment="CENTER_RIGHT">
+                <Button fx:id="saveBtn"
+                        text="Save Changes"
 
+                        styleClass="primary-btn, small, clickable-icon"
+                        onAction="#handleSave"/>
+            </HBox>
+        </VBox>
     </AnchorPane>
 </StackPane>
