@@ -108,3 +108,32 @@
     -fx-padding: 10 18;
     -fx-background-radius: 12;
 }
+/* Image styling */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 2);
+}
+
+/* Answer card styling */
+.answer-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 2;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+/* Progress bar styling */
+.progress-bar {
+    -fx-accent: #4CAF50;
+}
+
+.progress-bar .track {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 5;
+}
+
+.progress-bar .bar {
+    -fx-background-radius: 5;
+}

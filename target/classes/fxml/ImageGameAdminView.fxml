@@ -6,6 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.Pos?>
 
+<?import javafx.scene.image.ImageView?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.example.controller.ImageGameAdminController"
             stylesheets="@/css/image-game.css">
@@ -83,46 +84,54 @@
 
     <!-- CENTER QUESTION AND ANSWERS -->
     <center>
-        <VBox alignment="CENTER" spacing="48" styleClass="question-block-padding">
+        <VBox fx:id="mainContainer" alignment="CENTER" spacing="48" styleClass="question-block-padding">
             <padding>
                 <Insets top="20" bottom="20" right="30"/>
             </padding>
             <children>
-            <!-- Manage Images Button in Top Right -->
-           <HBox spacing="40" alignment="CENTER_RIGHT">
-               <padding>
-                   <Insets top="20" bottom="20" right="30"/>
-               </padding>
-               <Button text="🖼 Manage Images"
-                       layoutX="1120" layoutY="20"
-                       styleClass="manage-btn" />
-           </HBox>
+                <!-- Manage Images Button in Top Right -->
+                <HBox spacing="40" alignment="CENTER_RIGHT">
+                    <padding>
+                        <Insets top="20" bottom="20" right="30"/>
+                    </padding>
+                    <Button text="🖼 Manage Images"
+                            layoutX="1120" layoutY="20"
+                            styleClass="manage-btn" />
+                </HBox>
 
-            <!-- Centered Horizontal Layout -->
-            <HBox spacing="40" alignment="CENTER_LEFT">
+                <!-- Centered Horizontal Layout -->
+                <HBox spacing="40" alignment="CENTER_LEFT">
 
-                <!-- Left: Current Image Section -->
-                <VBox spacing="10">
-                    <Label text="CURRENT IMAGE" styleClass="subtitle"/>
-                    <Pane prefWidth="450" prefHeight="300" style="-fx-background-color: white; -fx-border-color: gray;" />
-                </VBox>
-
-                <!-- Middle: Answer Card -->
-                <VBox spacing="16" styleClass="answer-card" prefWidth="300" prefHeight="300">
-                    <VBox spacing="5">
-                        <Label text="Answer A" styleClass="answer-title"/>
-                        <Label text="This is the answer 01 to the question which is asked above."
-                               wrapText="true" styleClass="answer-text"/>
+                    <!-- Left: Current Image Section -->
+                    <VBox fx:id="imageContainer" spacing="10">
+                        <Label text="CURRENT IMAGE" styleClass="subtitle"/>
+                        <ImageView fx:id="questionImage"
+                                   fitWidth="450"
+                                   fitHeight="300"
+                                   preserveRatio="true"
+                                   style="-fx-border-color: gray;"/>
                     </VBox>
-                    <VBox spacing="5">
-                        <Label text="Progress" styleClass="answer-title"/>
-                        <ProgressBar progress="0.3" prefWidth="200" style="-fx-accent: green;" />
+
+                    <!-- Middle: Answer Card -->
+                    <VBox fx:id="answerCard" spacing="16" styleClass="answer-card" prefWidth="300" prefHeight="300">
+                        <VBox spacing="5">
+                            <Label text="Image Description" styleClass="answer-title"/>
+                            <Label fx:id="imageDescription"
+                                   text="No description available."
+                                   wrapText="true"
+                                   styleClass="answer-text"/>
+                        </VBox>
+                        <VBox spacing="5">
+                            <Label text="Progress" styleClass="answer-title"/>
+                            <ProgressBar fx:id="progressBar"
+                                         progress="0.0"
+                                         prefWidth="200"
+                                         style="-fx-accent: green;" />
+                        </VBox>
                     </VBox>
-                </VBox>
-            </HBox>
+                </HBox>
             </children>
         </VBox>
-
     </center>
 
     <bottom>

@@ -93,22 +93,22 @@
             </VBox>
 
             <!-- Answers -->
-            <HBox spacing="20">
-                <VBox alignment="CENTER" spacing="10" styleClass="answer">
+            <HBox fx:id="answersContainer" spacing="20">
+                <VBox fx:id="answerA" alignment="CENTER" spacing="10" styleClass="answer">
                     <Label text="Answer A" styleClass="answer-title"/>
-                    <Label text="Answer A text goes here." wrapText="true" styleClass="answer-text"/>
+                    <Label fx:id="answerAText" text="Answer A text goes here." wrapText="true" styleClass="answer-text"/>
                 </VBox>
-                <VBox alignment="CENTER" spacing="10" styleClass="answer">
+                <VBox fx:id="answerB" alignment="CENTER" spacing="10" styleClass="answer">
                     <Label text="Answer B" styleClass="answer-title"/>
-                    <Label text="Answer B text goes here." wrapText="true" styleClass="answer-text"/>
+                    <Label fx:id="answerBText" text="Answer B text goes here." wrapText="true" styleClass="answer-text"/>
                 </VBox>
-                <VBox alignment="CENTER" spacing="10" styleClass="answer">
+                <VBox fx:id="answerC" alignment="CENTER" spacing="10" styleClass="answer">
                     <Label text="Answer C" styleClass="answer-title"/>
-                    <Label text="Answer C text goes here." wrapText="true" styleClass="answer-text"/>
+                    <Label fx:id="answerCText" text="Answer C text goes here." wrapText="true" styleClass="answer-text"/>
                 </VBox>
-                <VBox alignment="CENTER" spacing="10" styleClass="answer">
+                <VBox fx:id="answerD" alignment="CENTER" spacing="10" styleClass="answer">
                     <Label text="Answer D" styleClass="answer-title"/>
-                    <Label text="Answer D text goes here." wrapText="true" styleClass="answer-text"/>
+                    <Label fx:id="answerDText" text="Answer D text goes here." wrapText="true" styleClass="answer-text"/>
                 </VBox>
             </HBox>
         </VBox>

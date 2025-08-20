@@ -81,33 +81,33 @@
         </HBox>
     </top>
 
-<!--    &lt;!&ndash; CENTER QUESTION AND ANSWERS &ndash;&gt;-->
+    <!-- CENTER QUESTION AND ANSWERS -->
     <center>
         <VBox alignment="CENTER_LEFT" spacing="20">
             <padding>
                 <Insets top="20" bottom="20" right="30" left="60"/>
             </padding>
-            <VBox spacing="20" alignment="CENTER_LEFT" maxWidth="500">
+            <VBox fx:id="musicContainer" spacing="20" alignment="CENTER_LEFT" maxWidth="500">
                 <Label text="CURRENT SONG" styleClass="current-song-label"/>
-                <Label text="THIS IS THE NAME OF THE SONG" styleClass="song-title-label"/>
+                <Label fx:id="songTitleLabel" text="No song loaded" styleClass="song-title-label"/>
 
                 <!-- Music Player Box -->
                 <VBox spacing="16" alignment="CENTER" styleClass="music-player-box" maxWidth="500">
                     <VBox spacing="16" alignment="CENTER" >
                         <HBox spacing="400" alignment="CENTER_LEFT">
-                            <Label text="0:12" styleClass="time-label"/>
-                            <Label text="2:34" styleClass="time-label"/>
+                            <Label fx:id="currentTimeLabel" text="0:00" styleClass="time-label"/>
+                            <Label fx:id="totalTimeLabel" text="0:00" styleClass="time-label"/>
                         </HBox>
                     </VBox>
 
                     <!-- Progress bar -->
-                    <Slider fx:id="musicSlider" min="0" max="100" value="20"
+                    <Slider fx:id="musicSlider" min="0" max="100" value="0"
                             styleClass="music-slider" prefWidth="400"/>
 
                     <!-- Playback controls -->
                     <HBox spacing="40" alignment="CENTER">
                         <Button text="⏮" styleClass="music-button"/>
-                        <Button text="▶" styleClass="music-button"/>
+                        <Button fx:id="playPauseBtn" text="▶" styleClass="music-button"/>
                         <Button text="⏭" styleClass="music-button"/>
                     </HBox>
                 </VBox>

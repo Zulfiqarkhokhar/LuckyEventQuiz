@@ -145,3 +145,55 @@
 .music-slider {
     -fx-pref-width: 400;
 }
+/* Music player styling */
+.music-player-box {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 2;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.song-title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.current-song-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #666666;
+    -fx-font-weight: bold;
+}
+
+.time-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}
+
+.music-slider .track {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 5;
+}
+
+.music-slider .thumb {
+    -fx-background-color: #4CAF50;
+    -fx-background-radius: 10;
+}
+
+.music-button {
+    -fx-font-size: 20px;
+    -fx-background-color: transparent;
+    -fx-border-color: #4CAF50;
+    -fx-border-radius: 20;
+    -fx-text-fill: #4CAF50;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+}
+
+.music-button:hover {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}

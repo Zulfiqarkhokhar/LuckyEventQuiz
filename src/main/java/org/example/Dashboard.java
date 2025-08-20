@@ -9,7 +9,7 @@ public class Dashboard {
 
     public static void show(Stage stage) {
         try {
-            Parent dashboardRoot = FXMLLoader.load(Dashboard.class.getResource("/fxml/QuestionScreen.fxml")); //DashboardScreen.fxml
+            Parent dashboardRoot = FXMLLoader.load(Dashboard.class.getResource("/fxml/DashboardScreen.fxml")); //DashboardScreen.fxml
             Scene dashboardScene = new Scene(dashboardRoot, 1280, 720);
             dashboardScene.getStylesheets().add(Dashboard.class.getResource("/css/styles.css").toExternalForm());
 
